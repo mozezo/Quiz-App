@@ -1,24 +1,30 @@
-import logo from './logo.svg';
+import React, { Suspense, useEffect } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import DefaultLayout from "../src/views/Layout/Layout";
+import Loading from '../src/components/Loading/Loading';
+import { Provider } from 'react-redux';
+import {store, persistor} from './redux/store';
+import { PersistGate } from "redux-persist/integration/react"
+
 import './App.css';
+
+//const store = configureStore();
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <PersistGate persistor={persistor}>
+        <div className="App">
+        <Router>
+            <Switch>
+              <Suspense fallback={<Loading />}>
+                <Route path="/" name="Home" component={DefaultLayout} />
+              </Suspense>
+            </Switch>
+          </Router>
+        </div>
+      </PersistGate>
+    </Provider>
   );
 }
 

@@ -1,0 +1,720 @@
+{
+    "status": "ok",
+    "sourceType": [{
+        "id": 1,
+        "name": "Life Style",
+        "img": "lifeStyle"
+    },
+    {
+        "id": 2,
+        "name": "Travel",
+        "img": "travel"
+    },
+    {
+        "id": 3,
+        "name": "Food",
+        "img": "lifeStyle"
+    },
+    {
+        "id": 4,
+        "name": "Sports",
+        "img": "sport"
+    }
+    ],
+    "questions": 
+    [{
+        "typeId": 1,
+        "id": "01",
+        "question": "what is your curent state?",
+        "answers": [
+        {
+            "id": 0,
+            "answer": "Choose Your Answer",
+            "img": "martialStatus"
+        },
+        {
+            "id": 1,
+            "answer": "Single",
+            "img": "single"
+        },
+        {
+            "id": 2,
+            "answer": "married",
+            "img": "married"
+        }
+    ]},
+    {
+        "typeId": 1,
+        "id": "03",
+        "question": "What is your passion in life?",
+        "answers": [
+        {
+            "id": 0,
+            "answer": "Choose Your Answer",
+            "img": "other"
+        },
+        {
+            "id": 1,
+            "answer": "reading",
+            "img": "reading"
+        },
+        {
+            "id": 2,
+            "answer": "drawing",
+            "img": "drawing"
+        },
+        {
+            "id": 3,
+            "answer": "writing",
+            "img": "writing"
+        },
+        {
+            "id": 4,
+            "answer": "volunteering",
+            "img": "volunteering"
+        },
+        {
+            "id": 5,
+            "answer": "cooking",
+            "img": "cooking"
+        },
+        {
+            "id": 6,
+            "answer": "pet raising",
+            "img": "petRaising"
+        },
+        {
+            "id": 7,
+            "answer": "photography",
+            "img": "photography"
+        },
+        {
+            "id": 8,
+            "answer": "movies",
+            "img": "movies"
+        },
+        {
+            "id": 9,
+            "answer": "travelling",
+            "img": "travelling"
+        },
+        {
+            "id": 10,
+            "answer": "sport & health",
+            "img": "sportHealth"
+        },
+        {
+            "id": 11,
+            "answer": "other",
+            "img": "other"
+        }
+    ]},
+    {
+        "typeId": 1,
+        "id": "04",
+        "question": "How do you enhance your knowledge?",
+        "answers": [
+        {
+            "id": 0,
+            "answer": "Choose Your Answer",
+            "img": "enhanceKnowledge"
+        },
+        {
+            "id": 1,
+            "answer": "Books",
+            "img": "books"
+        },
+        {
+            "id": 2,
+            "answer": "Training Courses",
+            "img": "trainingCourses"
+        },
+        {
+            "id": 3,
+            "answer": "Online Courses",
+            "img": "onlineCourses"
+        },
+        {
+            "id": 4,
+            "answer": "Other",
+            "img": "other"
+        }
+    ]},
+    {
+        "typeId": 1,
+        "id": "05",
+        "question": "What is your favorite social media channel?",
+        "answers": [
+        {
+            "id": 0,
+            "answer": "Choose Your Answer",
+            "img": "socialMedia"
+        },
+        {
+            "id": 1,
+            "answer": "Twitter",
+            "img": "twitter"
+        },
+        {
+            "id": 2,
+            "answer": "Snapchat",
+            "img": "snapchat"
+        },
+        {
+            "id": 3,
+            "answer": "WhatsApp",
+            "img": "whatsapp"
+        },
+        {
+            "id": 4,
+            "answer": "Instagram",
+            "img": "instagram"
+        },
+        {
+            "id": 5,
+            "answer": "Facebook",
+            "img": "facebook"
+        },
+        {
+            "id": 6,
+            "answer": "LinkedIn",
+            "img": "linkedin"
+        },
+        {
+            "id": 7,
+            "answer": "Other",
+            "img": "other"
+        }
+    ]},
+    {
+        "typeId": 1,
+        "id": "06",
+        "question": "What is your favorite device?",
+        "answers": [
+        {
+            "id": 0,
+            "answer": "Choose Your Answer",
+            "img": "favoriteDevice"
+        },
+        {
+            "id": 1,
+            "answer": "Playstation",
+            "img": "playstation"
+        },
+        {
+            "id": 2,
+            "answer": "XBOX",
+            "img": "xbox"
+        },
+        {
+            "id": 3,
+            "answer": "Mobile",
+            "img": "mobile"
+        },
+        {
+            "id": 4,
+            "answer": "TV",
+            "img": "tv"
+        },
+        {
+            "id": 5,
+            "answer": "Tablet",
+            "img": "tablet"
+        },
+        {
+            "id": 6,
+            "answer": "Laptop",
+            "img": "laptop"
+        },
+        {
+            "id": 7,
+            "answer": "Other",
+            "img": "other"
+        }
+    ]},
+    {
+        "typeId": 2,
+        "id": "01",
+        "question": "What is your desirable traveling destination?",
+        "answers": [
+        {
+            "id": 0,
+            "answer": "Choose Your Answer",
+            "img": "destination"
+        },
+        {
+            "id": 1,
+            "answer": "Beach",
+            "img": "beach"
+        },
+        {
+            "id": 2,
+            "answer": "Nature",
+            "img": "nature"
+        },
+        {
+            "id": 3,
+            "answer": "CountrySide",
+            "img": "countrySide"
+        },
+        {
+            "id": 4,
+            "answer": "Shopping",
+            "img": "shopping"
+        },
+        {
+            "id": 5,
+            "answer": "Museum & Culuture",
+            "img": "museum"
+        },
+        {
+            "id": 6,
+            "answer": "Modern Cities",
+            "img": "modernCities"
+        }
+    ]},
+    {
+        "typeId": 2,
+        "id": "02",
+        "question": "What is your favorite country to visit?",
+        "answers": [
+        {
+            "id": 0,
+            "answer": "Choose Your Answer",
+            "img": "destination"
+        },
+        {
+            "id": 1,
+            "answer": "South Africa",
+            "img": "southAfrica"
+        },
+        {
+            "id": 2,
+            "answer": "Asia",
+            "img": "asia"
+        },
+        {
+            "id": 3,
+            "answer": "South America",
+            "img": "southAmerica"
+        },
+        {
+            "id": 4,
+            "answer": "North America",
+            "img": "northAmerica"
+        },
+        {
+            "id": 5,
+            "answer": "Europe",
+            "img": "europe"
+        },
+        {
+            "id": 6,
+            "answer": "Australia",
+            "img": "australia"
+        },
+        {
+            "id": 7,
+            "answer": "Antarctica",
+            "img": "antarctica"
+        }
+    ]},
+    {
+        "typeId": 2,
+        "id": "03",
+        "question": "What is your preferred way to make a reservation?",
+        "answers": [
+        {
+            "id": 0,
+            "answer": "Choose Your Answer",
+            "img": "reservation"
+        },
+        {
+            "id": 1,
+            "answer": "Apps & Websites",
+            "img": "appsWeb"
+        },
+        {
+            "id": 2,
+            "answer": "Travelling Agencies",
+            "img": "travelAgency"
+        }
+    ]},
+    {
+        "typeId": 2,
+        "id": "04",
+        "question": "What is your choice of airline?",
+        "answers": [
+        {
+            "id": 0,
+            "answer": "Choose Your Answer",
+            "img": "airline"
+        },
+        {
+            "id": 1,
+            "answer": "Saudi Airlines",
+            "img": "saudiAirlines"
+        },
+        {
+            "id": 2,
+            "answer": "Flynas",
+            "img": "flynas"
+        },
+        {
+            "id": 3,
+            "answer": "Fly Adeal",
+            "img": "flyAdeal"
+        },
+        {
+            "id": 4,
+            "answer": "Emirates Airline",
+            "img": "emiratesAirline"
+        },
+        {
+            "id": 5,
+            "answer": "Etihad Airways",
+            "img": "etihadAirways"
+        },
+        {
+            "id": 6,
+            "answer": "Gulf Air ",
+            "img": "gulfAir"
+        },
+        {
+            "id": 7,
+            "answer": "Kuwait Airways",
+            "img": "kuwaitAirways"
+        },
+        {
+            "id": 8,
+            "answer": "Royal Jordanian Airlines",
+            "img": "jordanAirlines"
+        },
+        {
+            "id": 9,
+            "answer": "British Airways",
+            "img": "britishAirways"
+        },
+        {
+            "id": 10,
+            "answer": "Turkish Airlines",
+            "img": "turkishAirlines"
+        },
+        {
+            "id": 11,
+            "answer": "Lufthansa",
+            "img": "lufthansa"
+        },
+        {
+            "id": 12,
+            "answer": "French Airlines",
+            "img": "frechAirlines"
+        },
+        {
+            "id": 13,
+            "answer": "Other",
+            "img": "other"
+        }
+    ]},
+    {
+        "typeId": 4,
+        "id": "01",
+        "question": "Are you interested in sports?",
+        "answers": [
+        {
+            "id": 0,
+            "answer": "Choose Your Answer",
+            "img": "sports"
+        },
+        {
+            "id": 1,
+            "answer": "Yes",
+            "img": "sportYes"
+        },
+        {
+            "id": 2,
+            "answer": "No",
+            "img": "sportNo"
+        }
+    ]},
+    {
+        "typeId": 4,
+        "id": "02",
+        "question": "What is your favorite sport?",
+        "answers": [
+        {
+            "id": 0,
+            "answer": "Choose Your Answer",
+            "img": "favoriteSport"
+        },
+        {
+            "id": 1,
+            "answer": "Football",
+            "img": "football"
+        },
+        {
+            "id": 2,
+            "answer": "Basketball",
+            "img": "basketball"
+        },
+        {
+            "id": 3,
+            "answer": "Tennis",
+            "img": "tennis"
+        },
+        {
+            "id": 4,
+            "answer": "Gamel Racing",
+            "img": "gamlRacing"
+        },
+        {
+            "id": 5,
+            "answer": "Horse Racing",
+            "img": "horseRacing"
+        },
+        {
+            "id": 6,
+            "answer": "Body Building",
+            "img": "bodyBuilding"
+        },
+        {
+            "id": 7,
+            "answer": "Table Tennis",
+            "img": "tableTennis"
+        },
+        {
+            "id": 8,
+            "answer": "Scuba Diving",
+            "img": "scubaDiving"
+        },
+        {
+            "id": 9,
+            "answer": "Mountain Climbing",
+            "img": "mountainClimbing"
+        },
+        {
+            "id": 10,
+            "answer": "Swimming",
+            "img": "swimming"
+        },
+        {
+            "id": 11,
+            "answer": "Gymnastics",
+            "img": "gymnastics"
+        },
+        {
+            "id": 12,
+            "answer": "Hockey",
+            "img": "hockey"
+        }
+    ]},
+    {
+        "typeId": 4,
+        "id": "03",
+        "question": "What kind of sport do you practice daily?",
+        "answers": [
+        {
+            "id": 0,
+            "answer": "Choose Your Answer",
+            "img": "sports"
+        },
+        {
+            "id": 1,
+            "answer": "Walking",
+            "img": "walking"
+        },
+        {
+            "id": 2,
+            "answer": "Cycling",
+            "img": "cycling"
+        },
+        {
+            "id": 3,
+            "answer": "Swimming",
+            "img": "dailySwimming"
+        },
+        {
+            "id": 4,
+            "answer": "Weightlifting",
+            "img": "weightlifting"
+        },
+        {
+            "id": 5,
+            "answer": "Yoga",
+            "img": "yoga"
+        },
+        {
+            "id": 6,
+            "answer": "Boxing",
+            "img": "boxing"
+        },
+        {
+            "id": 7,
+            "answer": "CrossFit",
+            "img": "crossFit"
+        },
+        {
+            "id": 8,
+            "answer": "Other",
+            "img": "other"
+        }
+    ]},
+    {
+        "typeId": 4,
+        "id": "04",
+        "question": "Which Football Club do you support?",
+        "answers": [
+        {
+            "id": 0,
+            "answer": "Choose Your Answer",
+            "img": "footballClub"
+        },
+        {
+            "id": 1,
+            "answer": "Al Hilal",
+            "img": "alhilal"
+        },
+        {
+            "id": 2,
+            "answer": "Al Nassr",
+            "img": "alnassr"
+        },
+        {
+            "id": 3,
+            "answer": "Ittihad Fc",
+            "img": "ittihad"
+        },
+        {
+            "id": 4,
+            "answer": "Al Ahli",
+            "img": "alahli"
+        },
+        {
+            "id": 5,
+            "answer": "Al Shabab",
+            "img": "alshabab"
+        },
+        {
+            "id": 6,
+            "answer": "Chelsea",
+            "img": "chelsea"
+        },
+        {
+            "id": 7,
+            "answer": "LiverPool",
+            "img": "liverpool"
+        },
+        {
+            "id": 8,
+            "answer": "Manchester City",
+            "img": "manCity"
+        },
+        {
+            "id": 9,
+            "answer": "Manchester Unitied",
+            "img": "manUnitied"
+        },
+        {
+            "id": 10,
+            "answer": "Barchelona",
+            "img": "barchelona"
+        },
+        {
+            "id": 11,
+            "answer": "Real Madrid",
+            "img": "realMadrid"
+        },
+        {
+            "id": 12,
+            "answer": "Atlitco Madrid",
+            "img": "atlitcoMadrid"
+        },
+        {
+            "id": 13,
+            "answer": "Inter Milan",
+            "img": "interMilan"
+        },
+        {
+            "id": 14,
+            "answer": "Juventus",
+            "img": "juventus"
+        },
+        {
+            "id": 14,
+            "answer": "Milan",
+            "img": "milan"
+        },
+        {
+            "id": 16,
+            "answer": "Other",
+            "img": "other"
+        }
+    ]},
+    {
+        "typeId": 4,
+        "id": "05",
+        "question": "Which basketball Club do you support?",
+        "answers": [
+        {
+            "id": 0,
+            "answer": "Choose Your Answer",
+            "img": "basketball"
+        },
+        {
+            "id": 1,
+            "answer": "Boston Celtics",
+            "img": "bostonceltics"
+        },
+        {
+            "id": 2,
+            "answer": "Chicago Bulls",
+            "img": "chicagoBulls"
+        },
+        {
+            "id": 3,
+            "answer": "Golden State Warriors",
+            "img": "goldenStateWarriors"
+        },
+        {
+            "id": 4,
+            "answer": "Miami Heat",
+            "img": "miamiHeat"
+        },
+        {
+            "id": 5,
+            "answer": "Toronto Raptors",
+            "img": "torontoRaptors"
+        },
+        {
+            "id": 6,
+            "answer": "Real Madrid",
+            "img": "realMadrid"
+        },
+        {
+            "id": 7,
+            "answer": "Barchelona",
+            "img": "barchelona"
+        },
+        {
+            "id": 8,
+            "answer": "Olympiacos FC",
+            "img": "olympiacos"
+        },
+        {
+            "id": 9,
+            "answer": "La Lakers",
+            "img": "laLakers"
+        },
+        {
+            "id": 10,
+            "answer": "Houston Rockets",
+            "img": "houstonRockets"
+        },
+        {
+            "id": 11,
+            "answer": "Other",
+            "img": "other"
+        }
+    ]}
+    ]
+}
