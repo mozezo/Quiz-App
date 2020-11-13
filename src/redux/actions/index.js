@@ -1,4 +1,9 @@
-import { UPDATE_CURRENT_TYPE, UPDATE_CURRENT_Question, UPDATE_Answered_Questions } from '../constants/index';
+import { 
+    UPDATE_CURRENT_TYPE,
+    UPDATE_CURRENT_Question,
+    UPDATE_Answered_Questions,
+    UPDATE_Answered_AGE_Questions
+} from '../constants/index';
 
 
 
@@ -10,7 +15,6 @@ const updateCurrentType = index => {
 }
 
 const updateCurrentQuestion = index => {
-    console.log('updateCurrentQuestion')
     return{
         type: UPDATE_CURRENT_Question,
         payload: {index}
@@ -18,7 +22,6 @@ const updateCurrentQuestion = index => {
 }
 
 const updateAnsweredQuestions = (question, answer) => {
-    console.log('updateAnsweredQuestions', question, answer)
     const answeredQuestion = {...question, answer : answer}
     return{
         type: UPDATE_Answered_Questions,
@@ -26,7 +29,15 @@ const updateAnsweredQuestions = (question, answer) => {
     }
 }
 
+const updateAnsweredAgeQuestions = (question, answer) => {
+    const answeredQuestion = {...question, answer : answer}
+    return{
+        type: UPDATE_Answered_AGE_Questions,
+        payload: { answeredQuestion }
+    }
+}
 
 
 
-export { updateCurrentType, updateCurrentQuestion, updateAnsweredQuestions };
+
+export { updateCurrentType, updateCurrentQuestion, updateAnsweredQuestions, updateAnsweredAgeQuestions };

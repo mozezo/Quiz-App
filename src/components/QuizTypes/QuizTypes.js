@@ -8,8 +8,10 @@ import circle from '../../assets/images/circle.png';
 import Buttons from './CustomButtons';
 import IndicatorDots from './DotsIndicator';
 import Quizs from '../../data/Quiz_types.json';
-import { useSelector } from "react-redux";
+import QuizsAr from '../../data/Quiz_types_ar.json';
+import { useSelector, useDispatch } from "react-redux";
 import { get } from 'lodash';
+import { updateCurrentType } from '../../redux/actions';
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -30,22 +32,24 @@ const useStyles = makeStyles((theme) => ({
 const SurveyCarousel = ({history}) => {
 
     const classes = useStyles();
+    const dispatch = useDispatch();
 
     const [quizTypes, setQuizTypes] = useState([]);
-
+    const [lang, setLang] = useState('en');
     const currentType = useSelector((state) => state.quiz.currentType);
     console.log('---CURRENTTYPE---', currentType);
 
     useEffect(() => {
-        setQuizTypes(Quizs.sourceType)
+        lang === 'ar' ? setQuizTypes(QuizsAr.sourceType) : setQuizTypes(Quizs.sourceType);
+        dispatch(updateCurrentType(0));
     }, []);
 
     const handleStartQuizQuestions = () => {
         history.push(`/questions/${currentType.id}`)
     }
-
+    const isAr = lang === 'ar' ? true : false;
     return (
-        <SurveyWrapper>
+        <SurveyWrapper isAr={isAr}>
             <SurveyMainWrapper>
                 <SurveyMainSection>
                     <Carousel className="quiz-types-carousel" auto widgets={[IndicatorDots, Buttons]}>
@@ -81,6 +85,7 @@ const SurveyWrapper = styled.div`
     justify-content: space-between;
     width: 80%;
     margin: 175px auto 0px;
+    direction: ${props => props.isAr? 'rtl' : 'ltr'};
 
     @media only screen and (max-width: 768px) {
         margin: 0 auto;
