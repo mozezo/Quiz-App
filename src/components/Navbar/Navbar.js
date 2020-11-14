@@ -30,6 +30,6 @@ const NavbarNavbar = styled.div`
     color: #19d4d4;
 
     @media only screen and (max-width: 490px) {
-        padding: 50px 30px;
+        padding: 50px 45px;
     }
 `;

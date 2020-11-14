@@ -300,6 +300,10 @@ const SurveyMainWrapper = styled.div`
     display: flex;
     justify-content: space-between;
 
+    @media only screen and (max-width: 825px) {
+        flex-direction: column;
+    }
+
     .images-section{
         margin-top: 50px;
     }
@@ -312,6 +316,11 @@ const SurveyMainSection = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  @media only screen and (max-width: 825px) {
+    width: 96%;
+    margin: 0 auto;
+  }
 
   h1
   {
@@ -342,6 +351,20 @@ const SurveyMainSection = styled.div`
     width: 26%;
     animation: spin 5s ease-in-out infinite;
     -webkit-animation: spin 5s ease-in-out infinite;
+
+    @media only screen and (max-width: 825px) {
+        width: 46%;
+    }
+
+    @media only screen and (max-width: 525px) {
+        width: 66%;
+    }
+
+    @media only screen and (max-width: 425px) {
+        width: 82%;
+    }
+
+
     @keyframes spin {
         to {
         -webkit-transform: rotate(360deg);
