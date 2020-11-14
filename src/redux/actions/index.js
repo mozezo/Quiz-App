@@ -1,4 +1,5 @@
 import { 
+    SAVE_LANG,
     UPDATE_CURRENT_TYPE,
     UPDATE_CURRENT_Question,
     UPDATE_Answered_Questions,
@@ -6,6 +7,12 @@ import {
 } from '../constants/index';
 
 
+const saveLang = lang => {
+    return{
+        type: SAVE_LANG,
+        payload: { lang }
+    }
+}
 
 const updateCurrentType = index => {
     return{
@@ -38,6 +45,10 @@ const updateAnsweredAgeQuestions = (question, answer) => {
 }
 
 
-
-
-export { updateCurrentType, updateCurrentQuestion, updateAnsweredQuestions, updateAnsweredAgeQuestions };
+export {
+    saveLang, 
+    updateCurrentType, 
+    updateCurrentQuestion, 
+    updateAnsweredQuestions, 
+    updateAnsweredAgeQuestions
+ };

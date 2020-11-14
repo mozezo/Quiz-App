@@ -2,8 +2,10 @@ import React from 'react'
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
+import { useSelector, useDispatch } from "react-redux";
 import ByteCodeHome from '../../assets/images/byteCodeHome.png'
 import circle from '../../assets/images/circle.png';
+import { saveLang } from '../../redux/actions';
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -16,15 +18,38 @@ const useStyles = makeStyles((theme) => ({
         alignSelf: 'flex-start',
         opacity: 0.8,
     },
+    langButton: {
+        margin: theme.spacing(1, 1, 0, 0),
+        color: '#FFF',
+        border: 'none',
+        alignSelf: 'flex-start',
+        opacity: 0.8,
+    },
+    langButtonActive: {
+        margin: theme.spacing(1, 1, 0, 0),
+        color: '#19d4d4',
+        border: 'none',
+        alignSelf: 'flex-start',
+        opacity: 0.8,
+    }
 }));
 
 const Home = ({className, history}) => {
 
     const classes = useStyles();
-
+    const dispatch = useDispatch();
+    const arabicTitle = 'صممت هذة الصفحة لمعرفة عملائنا بشكل افضل , وذلك لتقيم مزايا وعروض تتناسب مع نمط حياتهم';
+    const englishTitle = 'this page is designed to know our clients better, in order to provide features and offers thats suit thier lifestyle.';
+    const lang = useSelector((state) => state.quiz.lang);
+    
     const handleStartQuiz = () => {
         console.log('handleStartQuiz')
         history.push('/quizs')
+    }
+
+    const handleLangChange = (lang) => {
+        console.log('handleLangChange', lang);
+        dispatch(saveLang(lang));
     }
 
     return (
@@ -33,20 +58,27 @@ const Home = ({className, history}) => {
                 <div></div>
                 <div> <h5>Hello, Username!</h5></div>
             </HomeNavbar>
-            <HomeMainWrapper>
-                <HomeMainSection>
+            <HomeMainWrapper lang={lang}>
+                <HomeMainSection lang={lang}>
                     <img src={circle} alt="circle" className="circle-image" /> 
                     <img src={ByteCodeHome} alt="ByteCode" style={{marginTop: '0px'}}/>
-                    <h2> Welcome</h2>
+                    <h2>{lang === 'en' ? 'Welcome' : 'اهلا بك' } </h2>
                 </HomeMainSection>
-                <HomeMainSection>
-                    <p>this page is designed to know our clients better, in order to provide features and offers that's suit thier lifestyle.</p>
+                <HomeMainSection lang={lang}>
+                    <p>{lang === 'en' ? englishTitle : arabicTitle}</p>
                     <Button  variant="outlined" color="primary" className={classes.button} onClick={handleStartQuiz}>
-                        Start
+                        {lang === 'en' ? 'Start' : 'البدء' }
                     </Button>
                 </HomeMainSection>
             </HomeMainWrapper>
-            <Footer><h5 className="ar"> Ar</h5> <h5 className="en">En</h5></Footer>
+            <Footer>
+                <Button  variant="outlined" color="primary" className={lang === 'ar' ? classes.langButtonActive : classes.langButton} onClick={() => handleLangChange('ar')}>
+                    Ar
+                </Button>
+                <Button  variant="outlined" color="primary" className={lang === 'en' ? classes.langButtonActive : classes.langButton} onClick={() => handleLangChange('en')}>
+                    En
+                </Button>
+            </Footer>
         </div>
     )
 }
@@ -74,6 +106,7 @@ const HomeMainWrapper = styled.div`
     justify-content: space-between;
     width: 80%;
     margin: 0 auto;
+    direction: ${props => props.lang === 'ar' ? 'rtl' : 'ltr'};
 
     @media only screen and (max-width: 768px) {
         flex-direction: column;
@@ -96,7 +129,7 @@ const HomeMainSection = styled.div`
   p
   {
     color: #FFF;
-    text-align: left;
+    text-align: ${props => props.lang === 'ar' ? 'right' : 'left'};
     font-size: 19px;
     line-height: 37px;
     margin-top: 175px;

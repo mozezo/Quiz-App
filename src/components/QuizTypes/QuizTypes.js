@@ -35,11 +35,12 @@ const SurveyCarousel = ({history}) => {
     const dispatch = useDispatch();
 
     const [quizTypes, setQuizTypes] = useState([]);
-    const [lang, setLang] = useState('en');
+    // const [lang, setLang] = useState('en');
     const currentType = useSelector((state) => state.quiz.currentType);
-    console.log('---CURRENTTYPE---', currentType);
+    const lang = useSelector((state) => state.quiz.lang);
 
     useEffect(() => {
+        console.log('QuizsArrr', QuizsAr);
         lang === 'ar' ? setQuizTypes(QuizsAr.sourceType) : setQuizTypes(Quizs.sourceType);
         dispatch(updateCurrentType(0));
     }, []);
@@ -68,7 +69,7 @@ const SurveyCarousel = ({history}) => {
                 </SurveyMainSection>
             </SurveyMainWrapper>
             <Button variant="outlined" color="primary" className={classes.button} onClick={handleStartQuizQuestions}>
-                start
+                {isAr ? 'ابدء' : 'Start'}
             </Button>
         </SurveyWrapper>
     )

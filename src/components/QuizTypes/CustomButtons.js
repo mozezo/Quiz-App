@@ -35,6 +35,7 @@ export default function Buttons (props) {
   // console.log('TypeProvider', state);
 
   const dispatch = useDispatch();
+  const lang = useSelector((state) => state.quiz.lang);
 
   const prevBtnStyle = Object.assign({}, styles.btn, styles.left)
   const nextBtnStyle = Object.assign({}, styles.btn, styles.right)
@@ -60,10 +61,10 @@ export default function Buttons (props) {
   return (
     <div style={styles.wrapper}>
       {
-        <div style={prevBtnStyle} onClick={handlePrevClick}>◀</div>
+        <div style={prevBtnStyle} onClick={lang === 'en' ? handlePrevClick : handleNextClick}>◀</div>
       }
       { 
-        <div style={nextBtnStyle} onClick={handleNextClick}>▶</div>
+        <div style={nextBtnStyle} onClick={lang === 'en' ? handleNextClick : handlePrevClick}>▶</div>
       }
     </div>
   )

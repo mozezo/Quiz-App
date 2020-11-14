@@ -12,11 +12,12 @@ import Male from '../../assets/images/male.png';
 import Female from '../../assets/images/female.png';
 import circle from '../../assets/images/circle.png';
 import Quizs from '../../data/Quiz_types.json';
+import QuizsAr from '../../data/Quiz_types_ar.json';
 import { useSelector, useDispatch } from "react-redux";
-import { updateAnsweredQuestions } from '../../redux/actions';
 import { get, isEmpty } from 'lodash';
 import Buttons from './QuestionCustomButtons';
-import { updateCurrentQuestion } from '../../redux/actions';
+
+import { updateCurrentQuestion, updateAnsweredQuestions, updateAnsweredAgeQuestions } from '../../redux/actions';
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -73,45 +74,39 @@ const Questions = ({ history }) => {
     const classes = useStyles();
     const dispatch = useDispatch();
 
+    const lang = useSelector((state) => state.quiz.lang);
+
     const currentType = useSelector((state) => state.quiz.currentType);
     const currentQuestion = useSelector((state) => state.quiz.currentQuestion);
     const currentAnsweredQuestions = useSelector((state) => state.quiz.answeredQuestions);
 
     const [currentQuestionAnswer, setCurrentQuestionAnswer] = useState({});
     const [questions, setQuestions] = useState([]);
-    const [currentAnswer, setCurrentAnswer] = useState(get(currentQuestion, `answers[${0}]`, []));
+    // const [currentAnswer, setCurrentAnswer] = useState(get(currentQuestion, `answers[${0}]`, []));
+    const [currentAnswer, setCurrentAnswer] = useState(get(currentQuestionAnswer, `answer`, get(currentQuestion, `answers[${0}]`, [])));
+
     const [currentAgeAnswer, setCurrentAgeAnswer] = useState(get(currentQuestion, `answers`, []));
     const [errorMessage, setErrorMessage] = useState('');
 
     const [genderType, setGenderType] = useState('male');
 
     const handleGenderChange = (event, ageAnswer) => {
-        setGenderType(event.target.value);
+        //setGenderType(event.target.value);
         let newAgeAnswers = [...currentAgeAnswer];
         let currentAgeIndex = newAgeAnswers.findIndex((item) => item.id === ageAnswer.id);
         newAgeAnswers[currentAgeIndex].type = event.target.value;
-        console.log('newAgeAnswers', newAgeAnswers);
-        // const currentageAnswer = {...currentAgeAnswer[0], type: event.target.value};
-        // console.log('currentAgeAnswer', currentageAnswer);
-        // setCurrentAgeAnswer(currentageAnswer);
+        setCurrentAgeAnswer(newAgeAnswers);
     };
 
     const handleAgeChange = (event, newValue, ageAnswer) => {
-        console.log('AGE CURRENT ANSWER', currentAnswer, newValue, ageAnswer);
         let newAgeAnswers = [...currentAgeAnswer];
         let currentAgeIndex = newAgeAnswers.findIndex((item) => item.id === ageAnswer.id);
         newAgeAnswers[currentAgeIndex].age = newValue;
-        console.log('newAgeAnswers', newAgeAnswers);
-
         setCurrentAgeAnswer(newAgeAnswers);
-        // const currentageAnswer = {...currentAgeAnswer[0], age: newValue};
-        // console.log('currentAgeAnswer', currentageAnswer);
-        // setCurrentAgeAnswer(currentageAnswer);
     };
 
     const handleAddNewChild = () => {
         let newAgeAnswer = [...currentAgeAnswer, {id: currentAgeAnswer.length, type: '', age: '', img: `${currentAgeAnswer.length}children` }];
-        console.log('newAgeAnswer', newAgeAnswer);
         setCurrentAgeAnswer(newAgeAnswer);
     }
 
@@ -122,7 +117,8 @@ const Questions = ({ history }) => {
     }
 
     useEffect(() => {
-        let filteredQuestions = Quizs.questions.filter((item) => {
+        let allQuestions = lang === 'en' ? Quizs : QuizsAr;
+        let filteredQuestions = get(allQuestions, 'questions', []).filter((item) => {
             return item.typeId === currentType.id
         })
         setQuestions(filteredQuestions);
@@ -132,10 +128,6 @@ const Questions = ({ history }) => {
         } else {
             dispatch(updateCurrentQuestion(currentquestionIndex));
         }
-
-        const currentQuestionAnswerValue = currentAnsweredQuestions.find((item) => item.typeId === get(currentQuestion, 'typeId') && item.id === get(currentQuestion, 'id'));
-        // console.log('currentQuestionAnswer', currentQuestionAnswerValue);
-        // console.log('currentAnswer', currentAnswer)
     }, []);
 
 
@@ -144,18 +136,29 @@ const Questions = ({ history }) => {
         // console.log('currentQuestionAnswer', currentQuestionAnswerValue);
         // console.log('currentAnswer', currentAnswer);
         setCurrentQuestionAnswer(currentQuestionAnswerValue);
+        setCurrentAnswer(get(currentQuestionAnswerValue, 'answer', get(currentQuestion, `answers[${0}]`, [])))
     }, [currentQuestion]);
 
     const handleNextClick = () => {
         const currentquestionIndex = questions.findIndex((question) => question.id === get(currentQuestion, 'id'));
-        // if (currentAnswer.id === 0 && isEmpty(currentQuestionAnswer)) {
-        //     setErrorMessage('Please answer this question!');
-        //     return;
-        // }
-        if (currentquestionIndex + 1 < questions.length) {
-            dispatch(updateCurrentQuestion(currentquestionIndex + 1));
-            dispatch(updateAnsweredQuestions(currentQuestion, currentAnswer))
-            setCurrentAnswer(get(currentQuestion, `answers[${0}]`, []));
+        if(get(currentQuestion, 'answerType', '') === 'select'){
+            if (get(currentAnswer, 'id') === 0 ) { //&& isEmpty(currentQuestionAnswer)
+                setErrorMessage('Please answer this question!');
+                return;
+            }
+            if (currentquestionIndex + 1 < questions.length) {
+                dispatch(updateCurrentQuestion(currentquestionIndex + 1));
+                dispatch(updateAnsweredQuestions(currentQuestion, currentAnswer))
+                setCurrentAnswer(get(currentQuestion, `answers[${0}]`, []));
+            }else{
+                setErrorMessage('Please Save Your Answers!');
+            }
+        }else{
+            if (currentquestionIndex + 1 < questions.length) {
+                dispatch(updateCurrentQuestion(currentquestionIndex + 1));
+                dispatch(updateAnsweredAgeQuestions(currentQuestion, currentAgeAnswer))
+                //setCurrentAnswer(get(currentQuestion, `answers[${0}]`, []));
+            }
         }
     }
 
@@ -169,30 +172,31 @@ const Questions = ({ history }) => {
 
     const handleSaveClick = () => {
         const currentquestionIndex = questions.findIndex((question) => question.id === get(currentQuestion, 'id'));
-        if (currentAnswer.id === 0) {
+        if (get(currentAnswer, 'id') === 0) {
             setErrorMessage('Please answer this question!');
             return;
         }
 
-        dispatch(updateCurrentQuestion(currentquestionIndex + 1));
+        //dispatch(updateCurrentQuestion(currentquestionIndex + 1));
         dispatch(updateAnsweredQuestions(currentQuestion, currentAnswer))
         history.push('/quizCompleted')
     }
 
     return (
-        <SurveyWrapper>
+        <SurveyWrapper lang={lang}>
             <SurveyMainWrapper>
                 <SurveyMainSection >
                     <h1>{currentType.name}</h1>
                     <>
-                    <FormLabel component="legend"><span style={{ color: '#00AF9A', marginRight: '10px', fontSize: '32px' }}>{get(currentQuestion, 'id', '')}</span>{get(currentQuestion, 'question', '')}</FormLabel>
+                    <FormLabel component="legend"><span style={{ color: '#00AF9A', marginRight: '10px', marginLeft: '10px', fontSize: '32px' }}>{get(currentQuestion, 'id', '')}</span>{get(currentQuestion, 'question', '')}</FormLabel>
 
                         {
                             get(currentQuestion, `answerType`, '') === 'select' ? (
                                 <>
                                     <SelectStyled
                                         native
-                                        value={JSON.stringify(get(currentQuestionAnswer, 'answer', currentAnswer))}
+                                        value={JSON.stringify(currentAnswer)}
+                                        //value={JSON.stringify(get(currentQuestionAnswer, 'answer', currentAnswer))}
                                         defaultValue={get(currentQuestion, `answers[${0}].answer`)}
                                         onChange={handleAnswerChange}
                                     >
@@ -219,6 +223,7 @@ const Questions = ({ history }) => {
                                                        ValueLabelComponent={ValueLabelComponent}
                                                        aria-label="custom thumb label"
                                                        defaultValue={7}
+                                                       max={26}
                                                        style={{color: 'rgb(0, 175, 154)'}}
                                                        onChange={(event, newValue) => handleAgeChange(event, newValue, ageAnswer)}
                                                    />
@@ -252,45 +257,27 @@ const Questions = ({ history }) => {
                                            </RadioAnswerTypeWrapper>
                                             )
                                         })
-                                    }
-                                    
+                                    }   
                                </>
                         }
-                        {/* <FormLabel component="legend"><span style={{ color: '#00AF9A', marginRight: '10px', fontSize: '32px' }}>{get(currentQuestion, 'id', '')}</span>{get(currentQuestion, 'question', '')}</FormLabel>
-                        <SelectStyled
-                            native
-                            value={JSON.stringify(get(currentQuestionAnswer, 'answer', currentAnswer))}
-                            defaultValue={get(currentQuestion, `answers[${0}].answer`)}
-                            onChange={handleAnswerChange}
-                        >
-                            {
-                                get(currentQuestion, 'answers', []).map((answerItem) => {
-                                    return (
-                                        <option value={JSON.stringify(answerItem)} style={{ color: '#00AF9A', fontSize: '18px', fontWeight: '700', marginTop: '10px' }}>{answerItem.answer}</option>
-                                    )
-                                })
-                            }
-                        </SelectStyled>
-                        <ErrorMessage>{errorMessage ? errorMessage : ''}</ErrorMessage> */}
                         <ButtonControlsWrapper>
                             <Button variant="outlined" color="primary" className={classes.button} onClick={handlePrevClick}>
-                                Prev
-                        </Button>
+                                {lang === 'en' ? 'Prev' : 'الرجوع'}
+                            </Button>
                             <Button variant="outlined" color="primary" className={classes.right} onClick={handleNextClick}>
-                                Next
-                        </Button>
+                                {lang === 'en' ? 'Next' : 'التالى'}
+                            </Button>
                         </ButtonControlsWrapper>
                     </>
                 </SurveyMainSection>
                 <SurveyMainSection className="images-section">
-                    <img src={require(`../../assets/images/${get(currentQuestionAnswer, 'answer.img', get(currentQuestion, `answers[${currentAnswer.id}].img`, 'martialStatus'))}.png`).default} alt="cc" />
-                    {/* <img src={require(`../../assets/images/${get(currentQuestion, `answers[${currentAnswer.id}].img`, 'martialStatus')}.png`).default} alt="cc" /> */}
-                    {/* <img src={require(`../../assets/images/${get(currentAnswer, `img`, 'martialStatus')}.png`).default} alt="cc" /> */}
+                    {/* <img src={require(`../../assets/images/${get(currentQuestionAnswer, 'answer.img', get(currentQuestion, `answers[${currentAnswer.id}].img`, 'martialStatus'))}.png`).default} alt="cc" /> */}
+                    <img src={require(`../../assets/images/${get(currentQuestion, `answers[${get(currentAnswer, 'id', 0)}].img`, 'martialStatus')}.png`).default} alt="cc" />
                     <img src={circle} alt="circle" className="circle-image" />
                 </SurveyMainSection>
             </SurveyMainWrapper>
             <Button variant="outlined" color="primary" className={classes.button} onClick={handleSaveClick}>
-                Save
+                {lang === 'en' ? 'Save' : 'حفظ'}
             </Button>
         </SurveyWrapper>
     )
@@ -305,6 +292,7 @@ const SurveyWrapper = styled.div`
     justify-content: space-between;
     width: 80%;
     margin: 30px auto 0px;
+    direction: ${props => props.lang === 'en' ? 'ltr' : 'rtl'};
 `;
 
 
@@ -437,3 +425,20 @@ const RadioAnswerSection = styled.div`
                             })
                         }
                     </Carousel> */}
+
+                     {/* <FormLabel component="legend"><span style={{ color: '#00AF9A', marginRight: '10px', fontSize: '32px' }}>{get(currentQuestion, 'id', '')}</span>{get(currentQuestion, 'question', '')}</FormLabel>
+                        <SelectStyled
+                            native
+                            value={JSON.stringify(get(currentQuestionAnswer, 'answer', currentAnswer))}
+                            defaultValue={get(currentQuestion, `answers[${0}].answer`)}
+                            onChange={handleAnswerChange}
+                        >
+                            {
+                                get(currentQuestion, 'answers', []).map((answerItem) => {
+                                    return (
+                                        <option value={JSON.stringify(answerItem)} style={{ color: '#00AF9A', fontSize: '18px', fontWeight: '700', marginTop: '10px' }}>{answerItem.answer}</option>
+                                    )
+                                })
+                            }
+                        </SelectStyled>
+                        <ErrorMessage>{errorMessage ? errorMessage : ''}</ErrorMessage> */}

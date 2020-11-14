@@ -2,22 +2,22 @@
     "status": "ok",
     "sourceType": [{
         "id": 1,
-        "name": "Life Style",
+        "name": "نمط الحياة",
         "img": "lifeStyle"
     },
     {
         "id": 2,
-        "name": "Travel",
+        "name": "السفر",
         "img": "travel"
     },
     {
         "id": 3,
-        "name": "Food",
+        "name": "الطعام",
         "img": "lifeStyle"
     },
     {
         "id": 4,
-        "name": "Sports",
+        "name": "الرياضة",
         "img": "sport"
     }
     ],
@@ -25,29 +25,29 @@
     [{
         "typeId": 1,
         "id": "01",
-        "question": "what is your curent state?",
+        "question": "ما هى حالتك الاجتماعية",
         "answerType": "select",
         "answers": [
         {
             "id": 0,
-            "answer": "Choose Your Answer",
+            "answer": "اختر الاجابة",
             "img": "martialStatus"
         },
         {
             "id": 1,
-            "answer": "Single",
+            "answer": "اعزب",
             "img": "single"
         },
         {
             "id": 2,
-            "answer": "married",
+            "answer": "متزوج",
             "img": "married"
         }
     ]},
     {
         "typeId": 1,
         "id": "02",
-        "question": "How Many Children do you have?",
+        "question": "كم عدد الاطفال لديك؟",
         "answerType": "radio",
         "answers": [
         {
@@ -60,686 +60,686 @@
     {
         "typeId": 1,
         "id": "03",
-        "question": "What is your passion in life?",
+        "question": "ما هو شغفك فى الحياة؟",
         "answerType": "select",
         "answers": [
         {
             "id": 0,
-            "answer": "Choose Your Answer",
+            "answer": "اختر الاجابة",
             "img": "other"
         },
         {
             "id": 1,
-            "answer": "reading",
+            "answer": "القراءة",
             "img": "reading"
         },
         {
             "id": 2,
-            "answer": "drawing",
+            "answer": "الرسم",
             "img": "drawing"
         },
         {
             "id": 3,
-            "answer": "writing",
+            "answer": "الكتابة",
             "img": "writing"
         },
         {
             "id": 4,
-            "answer": "volunteering",
+            "answer": "اعمال تطوعية",
             "img": "volunteering"
         },
         {
             "id": 5,
-            "answer": "cooking",
+            "answer": "الطبخ",
             "img": "cooking"
         },
         {
             "id": 6,
-            "answer": "pet raising",
+            "answer": "تربية الحيوانات الاليفة",
             "img": "petRaising"
         },
         {
             "id": 7,
-            "answer": "photography",
+            "answer": "التصوير",
             "img": "photography"
         },
         {
             "id": 8,
-            "answer": "movies",
+            "answer": "مشاهدة الافلام",
             "img": "movies"
         },
         {
             "id": 9,
-            "answer": "travelling",
+            "answer": "السفر",
             "img": "travelling"
         },
         {
             "id": 10,
-            "answer": "sport & health",
+            "answer": "الرياضة و الصحة",
             "img": "sportHealth"
         },
         {
             "id": 11,
-            "answer": "other",
+            "answer": "اخرى",
             "img": "other"
         }
     ]},
     {
         "typeId": 1,
         "id": "04",
-        "question": "How do you enhance your knowledge?",
+        "question": "كيف تحسن معلوماتك؟",
         "answerType": "select",
         "answers": [
         {
             "id": 0,
-            "answer": "Choose Your Answer",
+            "answer": "اختر الاجابة",
             "img": "enhanceKnowledge"
         },
         {
             "id": 1,
-            "answer": "Books",
+            "answer": "الكتب",
             "img": "books"
         },
         {
             "id": 2,
-            "answer": "Training Courses",
+            "answer": "دورات تدريبية",
             "img": "trainingCourses"
         },
         {
             "id": 3,
-            "answer": "Online Courses",
+            "answer": "كورسات اونلاين",
             "img": "onlineCourses"
         },
         {
             "id": 4,
-            "answer": "Other",
+            "answer": "اخرى",
             "img": "other"
         }
     ]},
     {
         "typeId": 1,
         "id": "05",
-        "question": "What is your favorite social media channel?",
+        "question": "ما هو موقع التواصل المفضل لديك؟",
         "answerType": "select",
         "answers": [
         {
             "id": 0,
-            "answer": "Choose Your Answer",
+            "answer": "اختر الاجابة",
             "img": "socialMedia"
         },
         {
             "id": 1,
-            "answer": "Twitter",
+            "answer": "تويتر",
             "img": "twitter"
         },
         {
             "id": 2,
-            "answer": "Snapchat",
+            "answer": "سناب شات",
             "img": "snapchat"
         },
         {
             "id": 3,
-            "answer": "WhatsApp",
+            "answer": "واتس اب",
             "img": "whatsapp"
         },
         {
             "id": 4,
-            "answer": "Instagram",
+            "answer": "انستجرام",
             "img": "instagram"
         },
         {
             "id": 5,
-            "answer": "Facebook",
+            "answer": "فيس بوك",
             "img": "facebook"
         },
         {
             "id": 6,
-            "answer": "LinkedIn",
+            "answer": "لينكيد ان",
             "img": "linkedin"
         },
         {
             "id": 7,
-            "answer": "Other",
+            "answer": "اخرى",
             "img": "other"
         }
     ]},
     {
         "typeId": 1,
         "id": "06",
-        "question": "What is your favorite device?",
+        "question": "ما الجهاز المفضل لديك؟",
         "answerType": "select",
         "answers": [
         {
             "id": 0,
-            "answer": "Choose Your Answer",
+            "answer": "اختر الاجابة",
             "img": "favoriteDevice"
         },
         {
             "id": 1,
-            "answer": "Playstation",
+            "answer": "بلايستيشن",
             "img": "playstation"
         },
         {
             "id": 2,
-            "answer": "XBOX",
+            "answer": "اكس بوكس",
             "img": "xbox"
         },
         {
             "id": 3,
-            "answer": "Mobile",
+            "answer": "الجوال",
             "img": "mobile"
         },
         {
             "id": 4,
-            "answer": "TV",
+            "answer": "التلفزيون",
             "img": "tv"
         },
         {
             "id": 5,
-            "answer": "Tablet",
+            "answer": "التابلات",
             "img": "tablet"
         },
         {
             "id": 6,
-            "answer": "Laptop",
+            "answer": "لاب توب",
             "img": "laptop"
         },
         {
             "id": 7,
-            "answer": "Other",
+            "answer": "اخرى",
             "img": "other"
         }
     ]},
     {
         "typeId": 2,
         "id": "01",
-        "question": "What is your desirable traveling destination?",
+        "question": "ما وجهة السفر المفضلة لديك؟",
         "answerType": "select",
         "answers": [
         {
             "id": 0,
-            "answer": "Choose Your Answer",
+            "answer": "اختر الاجابة",
             "img": "destination"
         },
         {
             "id": 1,
-            "answer": "Beach",
+            "answer": "الشاطى",
             "img": "beach"
         },
         {
             "id": 2,
-            "answer": "Nature",
+            "answer": "الطبيعة",
             "img": "nature"
         },
         {
             "id": 3,
-            "answer": "CountrySide",
+            "answer": "الريف",
             "img": "countrySide"
         },
         {
             "id": 4,
-            "answer": "Shopping",
+            "answer": "التسوق",
             "img": "shopping"
         },
         {
             "id": 5,
-            "answer": "Museum & Culuture",
+            "answer": "المتاحف و الثقافة",
             "img": "museum"
         },
         {
             "id": 6,
-            "answer": "Modern Cities",
+            "answer": "المدن الحديثة",
             "img": "modernCities"
         }
     ]},
     {
         "typeId": 2,
         "id": "02",
-        "question": "What is your favorite country to visit?",
+        "question": "ما هى المدينة التى تفضل زيارتها؟",
         "answerType": "select",
         "answers": [
         {
             "id": 0,
-            "answer": "Choose Your Answer",
+            "answer": "اختر الاجابة",
             "img": "destination"
         },
         {
             "id": 1,
-            "answer": "South Africa",
+            "answer": "جنوب افريقيا",
             "img": "southAfrica"
         },
         {
             "id": 2,
-            "answer": "Asia",
+            "answer": "اسيا",
             "img": "asia"
         },
         {
             "id": 3,
-            "answer": "South America",
+            "answer": "جنوب امريكا",
             "img": "southAmerica"
         },
         {
             "id": 4,
-            "answer": "North America",
+            "answer": "شمال امريكا",
             "img": "northAmerica"
         },
         {
             "id": 5,
-            "answer": "Europe",
+            "answer": "اوروبا",
             "img": "europe"
         },
         {
             "id": 6,
-            "answer": "Australia",
+            "answer": "استراليا",
             "img": "australia"
         },
         {
             "id": 7,
-            "answer": "Antarctica",
+            "answer": "انتريكا",
             "img": "antarctica"
         }
     ]},
     {
         "typeId": 2,
         "id": "03",
-        "question": "What is your preferred way to make a reservation?",
+        "question": "ما الطريقة المفضلة للحجز؟",
         "answerType": "select",
         "answers": [
         {
             "id": 0,
-            "answer": "Choose Your Answer",
+            "answer": "اختر الاجابة",
             "img": "reservation"
         },
         {
             "id": 1,
-            "answer": "Apps & Websites",
+            "answer": "التطبيقات و المواقع",
             "img": "appsWeb"
         },
         {
             "id": 2,
-            "answer": "Travelling Agencies",
+            "answer": "وكالات السفر",
             "img": "travelAgency"
         }
     ]},
     {
         "typeId": 2,
         "id": "04",
-        "question": "What is your choice of airline?",
+        "question": "ما هى شركة الطيران المفضلة لديك؟",
         "answerType": "select",
         "answers": [
         {
             "id": 0,
-            "answer": "Choose Your Answer",
+            "answer": "اختر الاجابة",
             "img": "airline"
         },
         {
             "id": 1,
-            "answer": "Saudi Airlines",
+            "answer": "الخطوط الجوية السعودية",
             "img": "saudiAirlines"
         },
         {
             "id": 2,
-            "answer": "Flynas",
+            "answer": "طيران ناس",
             "img": "flynas"
         },
         {
             "id": 3,
-            "answer": "Fly Adeal",
+            "answer": "طيران اديل",
             "img": "flyAdeal"
         },
         {
             "id": 4,
-            "answer": "Emirates Airline",
+            "answer": "طيران الامارات",
             "img": "emiratesAirline"
         },
         {
             "id": 5,
-            "answer": "Etihad Airways",
+            "answer": "طيران الاتحاد",
             "img": "etihadAirways"
         },
         {
             "id": 6,
-            "answer": "Gulf Air ",
+            "answer": "طيران الخليج",
             "img": "gulfAir"
         },
         {
             "id": 7,
-            "answer": "Kuwait Airways",
+            "answer": "طيران الكويت",
             "img": "kuwaitAirways"
         },
         {
             "id": 8,
-            "answer": "Royal Jordanian Airlines",
+            "answer": "الخطوط الجوية الملكية الأردنية",
             "img": "jordanAirlines"
         },
         {
             "id": 9,
-            "answer": "British Airways",
+            "answer": "الخطوط الجوية البريطانية",
             "img": "britishAirways"
         },
         {
             "id": 10,
-            "answer": "Turkish Airlines",
+            "answer": "الخطوط الجوية التركية",
             "img": "turkishAirlines"
         },
         {
             "id": 11,
-            "answer": "Lufthansa",
+            "answer": "لوفتهانزا",
             "img": "lufthansa"
         },
         {
             "id": 12,
-            "answer": "French Airlines",
+            "answer": "الخطوط الجوية الفرنسية",
             "img": "frechAirlines"
         },
         {
             "id": 13,
-            "answer": "Other",
+            "answer": "اخرى",
             "img": "other"
         }
     ]},
     {
         "typeId": 4,
         "id": "01",
-        "question": "Are you interested in sports?",
+        "question": "هل انت مهتم بالرياضة",
         "answerType": "select",
         "answers": [
         {
             "id": 0,
-            "answer": "Choose Your Answer",
+            "answer": "اختر الاجابة",
             "img": "sports"
         },
         {
             "id": 1,
-            "answer": "Yes",
+            "answer": "نعم",
             "img": "sportYes"
         },
         {
             "id": 2,
-            "answer": "No",
+            "answer": "لا",
             "img": "sportNo"
         }
     ]},
     {
         "typeId": 4,
         "id": "02",
-        "question": "What is your favorite sport?",
+        "question": "ما الرياضة المفضلة لديك؟",
         "answerType": "select",
         "answers": [
         {
             "id": 0,
-            "answer": "Choose Your Answer",
+            "answer": "اختر الاجابة",
             "img": "favoriteSport"
         },
         {
             "id": 1,
-            "answer": "Football",
+            "answer": "كرة القدم",
             "img": "football"
         },
         {
             "id": 2,
-            "answer": "Basketball",
+            "answer": "كرة سلة",
             "img": "basketball"
         },
         {
             "id": 3,
-            "answer": "Tennis",
+            "answer": "التنس",
             "img": "tennis"
         },
         {
             "id": 4,
-            "answer": "Gamel Racing",
+            "answer": "سباق الجمال",
             "img": "gamlRacing"
         },
         {
             "id": 5,
-            "answer": "Horse Racing",
+            "answer": "سباق الخيل",
             "img": "horseRacing"
         },
         {
             "id": 6,
-            "answer": "Body Building",
+            "answer": "كمال اجسام",
             "img": "bodyBuilding"
         },
         {
             "id": 7,
-            "answer": "Table Tennis",
+            "answer": "تنس طاولة",
             "img": "tableTennis"
         },
         {
             "id": 8,
-            "answer": "Scuba Diving",
+            "answer": "الغوص",
             "img": "scubaDiving"
         },
         {
             "id": 9,
-            "answer": "Mountain Climbing",
+            "answer": "تسلق الجبال",
             "img": "mountainClimbing"
         },
         {
             "id": 10,
-            "answer": "Swimming",
+            "answer": "السباحة",
             "img": "swimming"
         },
         {
             "id": 11,
-            "answer": "Gymnastics",
+            "answer": "رياضة بدنية",
             "img": "gymnastics"
         },
         {
             "id": 12,
-            "answer": "Hockey",
+            "answer": "الهوكى",
             "img": "hockey"
         }
     ]},
     {
         "typeId": 4,
         "id": "03",
-        "question": "What kind of sport do you practice daily?",
+        "question": "ما هى الرياضة التى تمارسها يوميا؟",
         "answerType": "select",
         "answers": [
         {
             "id": 0,
-            "answer": "Choose Your Answer",
+            "answer": "اختر الاجابة",
             "img": "sports"
         },
         {
             "id": 1,
-            "answer": "Walking",
+            "answer": "المشى",
             "img": "walking"
         },
         {
             "id": 2,
-            "answer": "Cycling",
+            "answer": "ركوب الدراجات",
             "img": "cycling"
         },
         {
             "id": 3,
-            "answer": "Swimming",
+            "answer": "السباحة",
             "img": "dailySwimming"
         },
         {
             "id": 4,
-            "answer": "Weightlifting",
+            "answer": "رفع الاثقال",
             "img": "weightlifting"
         },
         {
             "id": 5,
-            "answer": "Yoga",
+            "answer": "اليوجا",
             "img": "yoga"
         },
         {
             "id": 6,
-            "answer": "Boxing",
+            "answer": "الملاكمة",
             "img": "boxing"
         },
         {
             "id": 7,
-            "answer": "CrossFit",
+            "answer": "برنامج لياقة عالي الكثافة",
             "img": "crossFit"
         },
         {
             "id": 8,
-            "answer": "Other",
+            "answer": "اخرى",
             "img": "other"
         }
     ]},
     {
         "typeId": 4,
         "id": "04",
-        "question": "Which Football Club do you support?",
+        "question": "ما هو نادى كرة القدم المفضل لديك؟",
         "answerType": "select",
         "answers": [
         {
             "id": 0,
-            "answer": "Choose Your Answer",
+            "answer": "اختر الاجابة",
             "img": "footballClub"
         },
         {
             "id": 1,
-            "answer": "Al Hilal",
+            "answer": "الهلال",
             "img": "alhilal"
         },
         {
             "id": 2,
-            "answer": "Al Nassr",
+            "answer": "النصر",
             "img": "alnassr"
         },
         {
             "id": 3,
-            "answer": "Ittihad Fc",
+            "answer": "الاتحاد",
             "img": "ittihad"
         },
         {
             "id": 4,
-            "answer": "Al Ahli",
+            "answer": "الاهلى",
             "img": "alahli"
         },
         {
             "id": 5,
-            "answer": "Al Shabab",
+            "answer": "الشباب",
             "img": "alshabab"
         },
         {
             "id": 6,
-            "answer": "Chelsea",
+            "answer": "تشيلسى",
             "img": "chelsea"
         },
         {
             "id": 7,
-            "answer": "LiverPool",
+            "answer": "ليفربول",
             "img": "liverpool"
         },
         {
             "id": 8,
-            "answer": "Manchester City",
+            "answer": "مانشستر سيتى",
             "img": "manCity"
         },
         {
             "id": 9,
-            "answer": "Manchester Unitied",
+            "answer": "مانشستر يونايتد",
             "img": "manUnitied"
         },
         {
             "id": 10,
-            "answer": "Barchelona",
+            "answer": "برشلونة",
             "img": "barchelona"
         },
         {
             "id": 11,
-            "answer": "Real Madrid",
+            "answer": "ريال مدريد",
             "img": "realMadrid"
         },
         {
             "id": 12,
-            "answer": "Atlitco Madrid",
+            "answer": "اتليتكو مدريد",
             "img": "atlitcoMadrid"
         },
         {
             "id": 13,
-            "answer": "Inter Milan",
+            "answer": "انتر ميلان",
             "img": "interMilan"
         },
         {
             "id": 14,
-            "answer": "Juventus",
+            "answer": "يوفنتوس",
             "img": "juventus"
         },
         {
             "id": 14,
-            "answer": "Milan",
+            "answer": "ميلان",
             "img": "milan"
         },
         {
             "id": 16,
-            "answer": "Other",
+            "answer": "اخرى",
             "img": "other"
         }
     ]},
     {
         "typeId": 4,
         "id": "05",
-        "question": "Which basketball Club do you support?",
+        "question": "ما هو نادى كرة السلة المفضل لديكم",
         "answerType": "select",
         "answers": [
         {
             "id": 0,
-            "answer": "Choose Your Answer",
+            "answer": "اختر الاجابة",
             "img": "basketball"
         },
         {
             "id": 1,
-            "answer": "Boston Celtics",
+            "answer": "بوسطن سلتكس",
             "img": "bostonceltics"
         },
         {
             "id": 2,
-            "answer": "Chicago Bulls",
+            "answer": "شيكاغو بولز",
             "img": "chicagoBulls"
         },
         {
             "id": 3,
-            "answer": "Golden State Warriors",
+            "answer": "غولدن ستايت ووريورز",
             "img": "goldenStateWarriors"
         },
         {
             "id": 4,
-            "answer": "Miami Heat",
+            "answer": "ميامي هيت",
             "img": "miamiHeat"
         },
         {
             "id": 5,
-            "answer": "Toronto Raptors",
+            "answer": "تورونتو رابتورز",
             "img": "torontoRaptors"
         },
         {
             "id": 6,
-            "answer": "Real Madrid",
+            "answer": "ريال مدريد",
             "img": "realMadrid"
         },
         {
             "id": 7,
-            "answer": "Barchelona",
+            "answer": "برشلونة",
             "img": "barchelona"
         },
         {
             "id": 8,
-            "answer": "Olympiacos FC",
+            "answer": "أولمبياكوس",
             "img": "olympiacos"
         },
         {
             "id": 9,
-            "answer": "La Lakers",
+            "answer": "لا ليكرز",
             "img": "laLakers"
         },
         {
             "id": 10,
-            "answer": "Houston Rockets",
+            "answer": "هيوستن روكتس",
             "img": "houstonRockets"
         },
         {
             "id": 11,
-            "answer": "Other",
+            "answer": "اخرى",
             "img": "other"
         }
     ]}
