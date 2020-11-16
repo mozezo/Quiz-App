@@ -28,6 +28,67 @@
   color: #61dafb;
 }
 
+/* appear - on page load */
+.fade-appear {
+  opacity: 0;
+  z-index: 1;
+}
+.fade-appear.fade-appear-active {
+opacity: 1;
+transition: opacity 1000ms linear;
+}
+
+/* enter */
+.fade-enter {
+opacity: 0;
+z-index: 1;
+}
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transition: opacity 5000ms linear 5000ms;
+}
+
+/* exit */
+.fade-exit {
+  opacity: 1;
+}
+.fade-exit.fade-exit-active {
+  opacity: 0;
+  transition: opacity 5000ms linear;
+}
+.fade-exit-done {
+opacity: 0;
+}
+
+/* slide enter 1*/
+.slide-enter {
+opacity: 0.9; 
+transform: scale(0.97) translateY(5px);
+z-index: 1;
+}
+.slide-enter.slide-enter-active {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  transition: opacity 500ms linear 500ms, transform 500ms ease-in-out 500ms;
+}
+
+/* slide exit */
+.slide-exit {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  
+}
+/* slide enter 2*/
+.slide-exit.slide-exit-active {
+  opacity: 1;
+  transform: scale(0.97) translateY(5px);
+  transition: opacity 500ms linear, transform 500ms ease-out;
+}
+/* slide enter 3*/
+.slide-exit-done {
+  opacity: 1;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

@@ -106,7 +106,7 @@ const HomeMainWrapper = styled.div`
     justify-content: space-between;
     width: 80%;
     margin: 0 auto;
-    direction: ${props => props.lang === 'ar' ? 'rtl' : 'ltr'};
+    /* direction: ${props => props.lang === 'ar' ? 'rtl' : 'ltr'}; */
 
     @media only screen and (max-width: 768px) {
         flex-direction: column;

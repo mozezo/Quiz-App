@@ -46,7 +46,7 @@ const SurveyCarousel = ({history}) => {
     }, []);
 
     const handleStartQuizQuestions = () => {
-        history.push(`/questions/${currentType.id}`)
+        history.push(`/questions/${get(currentType, 'id', 1)}`)
     }
     const isAr = lang === 'ar' ? true : false;
     return (

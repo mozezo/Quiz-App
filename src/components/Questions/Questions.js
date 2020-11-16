@@ -16,6 +16,7 @@ import QuizsAr from '../../data/Quiz_types_ar.json';
 import { useSelector, useDispatch } from "react-redux";
 import { get, isEmpty } from 'lodash';
 import Buttons from './QuestionCustomButtons';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import { updateCurrentQuestion, updateAnsweredQuestions, updateAnsweredAgeQuestions } from '../../redux/actions';
 
@@ -30,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
         alignSelf: 'flex-start',
         padding: '8px 36px',
         marginTop: '75px',
+        transition: 'all 1s ease',
     },
     right: {
         margin: theme.spacing(1, 1, 0, 0),
@@ -39,6 +41,7 @@ const useStyles = makeStyles((theme) => ({
         background: '#00AF9A !important',
         color: '#FFF',
         marginTop: '75px',
+        transition: 'all 1s ease'
     },
     add: {
         border: ' 1px solid #00AF9A',
@@ -51,23 +54,23 @@ const useStyles = makeStyles((theme) => ({
 
 const GreenRadio = withStyles({
     root: {
-      color: 'rgb(0, 175, 154)',
-      '&$checked': {
         color: 'rgb(0, 175, 154)',
-      },
+        '&$checked': {
+            color: 'rgb(0, 175, 154)',
+        },
     },
     checked: {},
-  })((props) => <Radio color="default" {...props} />);
+})((props) => <Radio color="default" {...props} />);
 
 function ValueLabelComponent(props) {
     const { children, open, value } = props;
-  
+
     return (
-      <Tooltip open={open} enterTouchDelay={0} placement="top" title={value}>
-        {children}
-      </Tooltip>
+        <Tooltip open={open} enterTouchDelay={0} placement="top" title={value}>
+            {children}
+        </Tooltip>
     );
-  }
+}
 
 const Questions = ({ history }) => {
 
@@ -106,7 +109,7 @@ const Questions = ({ history }) => {
     };
 
     const handleAddNewChild = () => {
-        let newAgeAnswer = [...currentAgeAnswer, {id: currentAgeAnswer.length, type: '', age: '', img: `${currentAgeAnswer.length}children` }];
+        let newAgeAnswer = [...currentAgeAnswer, { id: currentAgeAnswer.length, type: '', age: '', img: `${currentAgeAnswer.length}children` }];
         setCurrentAgeAnswer(newAgeAnswer);
     }
 
@@ -119,7 +122,7 @@ const Questions = ({ history }) => {
     useEffect(() => {
         let allQuestions = lang === 'en' ? Quizs : QuizsAr;
         let filteredQuestions = get(allQuestions, 'questions', []).filter((item) => {
-            return item.typeId === currentType.id
+            return item.typeId === get(currentType, 'id', 1)
         })
         setQuestions(filteredQuestions);
         const currentquestionIndex = filteredQuestions.findIndex((question) => question.id === get(currentQuestion, 'id', ''));
@@ -141,8 +144,8 @@ const Questions = ({ history }) => {
 
     const handleNextClick = () => {
         const currentquestionIndex = questions.findIndex((question) => question.id === get(currentQuestion, 'id'));
-        if(get(currentQuestion, 'answerType', '') === 'select'){
-            if (get(currentAnswer, 'id') === 0 ) { //&& isEmpty(currentQuestionAnswer)
+        if (get(currentQuestion, 'answerType', '') === 'select') {
+            if (get(currentAnswer, 'id') === 0) { //&& isEmpty(currentQuestionAnswer)
                 setErrorMessage('Please answer this question!');
                 return;
             }
@@ -150,10 +153,10 @@ const Questions = ({ history }) => {
                 dispatch(updateCurrentQuestion(currentquestionIndex + 1));
                 dispatch(updateAnsweredQuestions(currentQuestion, currentAnswer))
                 setCurrentAnswer(get(currentQuestion, `answers[${0}]`, []));
-            }else{
+            } else {
                 setErrorMessage('Please Save Your Answers!');
             }
-        }else{
+        } else {
             if (currentquestionIndex + 1 < questions.length) {
                 dispatch(updateCurrentQuestion(currentquestionIndex + 1));
                 dispatch(updateAnsweredAgeQuestions(currentQuestion, currentAgeAnswer))
@@ -183,103 +186,113 @@ const Questions = ({ history }) => {
     }
 
     return (
-        <SurveyWrapper lang={lang}>
-            <SurveyMainWrapper>
-                <SurveyMainSection >
-                    <h1>{currentType.name}</h1>
-                    <>
-                    <FormLabel component="legend"><span style={{ color: '#00AF9A', marginRight: '10px', marginLeft: '10px', fontSize: '32px' }}>{get(currentQuestion, 'id', '')}</span>{get(currentQuestion, 'question', '')}</FormLabel>
+        <TransitionGroup>
+            <CSSTransition
+                key={get(currentQuestion, 'id', '')}
+                timeout={1000}
+                classNames="slide"
+            >
+                <SurveyWrapper lang={lang}>
+                    <SurveyMainWrapper>
+                        <SurveyMainSection >
+                            <h1>{get(currentType, 'name', '')}</h1>
+                            <>
+                                <FormLabel component="legend"><span style={{ color: '#00AF9A', marginRight: '10px', marginLeft: '10px', fontSize: '32px' }}>{get(currentQuestion, 'id', '')}</span>{get(currentQuestion, 'question', '')}</FormLabel>
 
-                        {
-                            get(currentQuestion, `answerType`, '') === 'select' ? (
-                                <>
-                                    <SelectStyled
-                                        native
-                                        value={JSON.stringify(currentAnswer)}
-                                        //value={JSON.stringify(get(currentQuestionAnswer, 'answer', currentAnswer))}
-                                        defaultValue={get(currentQuestion, `answers[${0}].answer`)}
-                                        onChange={handleAnswerChange}
-                                    >
-                                        {
-                                            get(currentQuestion, 'answers', []).map((answerItem) => {
-                                                return (
-                                                    <option value={JSON.stringify(answerItem)} style={{ color: '#00AF9A', fontSize: '18px', fontWeight: '700', marginTop: '10px' }}>{answerItem.answer}</option>
-                                                )
-                                            })
-                                        }
-                                    </SelectStyled>
-                                    <ErrorMessage>{errorMessage ? errorMessage : ''}</ErrorMessage>
-                                </>
-                            )
-                                :
-                                <>
-                                    {
-                                        currentAgeAnswer.map((ageAnswer, index) => {
-                                            return(
-                                                <RadioAnswerTypeWrapper key={index}>
-                                                <RadioAnswerSection style={{width: '55%'}}>
-                                                    <h3>Age</h3>
-                                                   <Slider
-                                                       ValueLabelComponent={ValueLabelComponent}
-                                                       aria-label="custom thumb label"
-                                                       defaultValue={7}
-                                                       max={26}
-                                                       style={{color: 'rgb(0, 175, 154)'}}
-                                                       onChange={(event, newValue) => handleAgeChange(event, newValue, ageAnswer)}
-                                                   />
-                                               </RadioAnswerSection>
-                                               <RadioAnswerSection>
-                                                   <img src={Male} alt="male"/>
-                                                   <GreenRadio
-                                                       checked={ageAnswer.type === 'male'}
-                                                       onChange={(event) => handleGenderChange(event, ageAnswer)}
-                                                       value="male"
-                                                       name="radio-button-demo"
-                                                       inputProps={{ 'aria-label': 'male' }}
-                                                   />
-                                               </RadioAnswerSection>
-                                               <RadioAnswerSection>
-                                                   <img src={Female} alt="female"/>
-                                                   <GreenRadio
-                                                       checked={ageAnswer.type === 'female'}
-                                                       onChange={(event) => handleGenderChange(event, ageAnswer)}
-                                                       value="female"
-                                                       name="radio-button-demo"
-                                                       inputProps={{ 'aria-label': 'female' }}
-                                                   />
-                                               </RadioAnswerSection>
-                                               <RadioAnswerSection>
-                                                   <div></div>
-                                                   <Button variant="outlined" color="primary" className={classes.add} onClick={handleAddNewChild}>
-                                                       add
+                                {
+                                    get(currentQuestion, `answerType`, '') === 'select' ? (
+
+                                        <>
+                                            <SelectStyled
+                                                native
+                                                value={JSON.stringify(currentAnswer)}
+                                                //value={JSON.stringify(get(currentQuestionAnswer, 'answer', currentAnswer))}
+                                                defaultValue={get(currentQuestion, `answers[${0}].answer`)}
+                                                onChange={handleAnswerChange}
+                                            >
+                                                {
+                                                    get(currentQuestion, 'answers', []).map((answerItem) => {
+                                                        return (
+                                                            <option value={JSON.stringify(answerItem)} style={{ color: '#00AF9A', fontSize: '18px', fontWeight: '700', marginTop: '10px' }}>{answerItem.answer}</option>
+                                                        )
+                                                    })
+                                                }
+                                            </SelectStyled>
+                                            <ErrorMessage>{errorMessage ? errorMessage : ''}</ErrorMessage>
+                                        </>
+
+                                    )
+                                        :
+                                        <>
+                                            {
+                                                currentAgeAnswer.map((ageAnswer, index) => {
+                                                    return (
+                                                        <RadioAnswerTypeWrapper key={index}>
+                                                            <RadioAnswerSection style={{ width: '55%' }}>
+                                                                <h3>Age</h3>
+                                                                <Slider
+                                                                    ValueLabelComponent={ValueLabelComponent}
+                                                                    aria-label="custom thumb label"
+                                                                    defaultValue={7}
+                                                                    max={26}
+                                                                    style={{ color: 'rgb(0, 175, 154)' }}
+                                                                    onChange={(event, newValue) => handleAgeChange(event, newValue, ageAnswer)}
+                                                                />
+                                                            </RadioAnswerSection>
+                                                            <RadioAnswerSection>
+                                                                <img src={Male} alt="male" />
+                                                                <GreenRadio
+                                                                    checked={ageAnswer.type === 'male'}
+                                                                    onChange={(event) => handleGenderChange(event, ageAnswer)}
+                                                                    value="male"
+                                                                    name="radio-button-demo"
+                                                                    inputProps={{ 'aria-label': 'male' }}
+                                                                />
+                                                            </RadioAnswerSection>
+                                                            <RadioAnswerSection>
+                                                                <img src={Female} alt="female" />
+                                                                <GreenRadio
+                                                                    checked={ageAnswer.type === 'female'}
+                                                                    onChange={(event) => handleGenderChange(event, ageAnswer)}
+                                                                    value="female"
+                                                                    name="radio-button-demo"
+                                                                    inputProps={{ 'aria-label': 'female' }}
+                                                                />
+                                                            </RadioAnswerSection>
+                                                            <RadioAnswerSection>
+                                                                <div></div>
+                                                                <Button variant="outlined" color="primary" className={classes.add} onClick={handleAddNewChild}>
+                                                                    add
                                                    </Button>
-                                               </RadioAnswerSection>
-                                           </RadioAnswerTypeWrapper>
-                                            )
-                                        })
-                                    }   
-                               </>
-                        }
-                        <ButtonControlsWrapper>
-                            <Button variant="outlined" color="primary" className={classes.button} onClick={handlePrevClick}>
-                                {lang === 'en' ? 'Prev' : 'الرجوع'}
-                            </Button>
-                            <Button variant="outlined" color="primary" className={classes.right} onClick={handleNextClick}>
-                                {lang === 'en' ? 'Next' : 'التالى'}
-                            </Button>
-                        </ButtonControlsWrapper>
-                    </>
-                </SurveyMainSection>
-                <SurveyMainSection className="images-section">
-                    {/* <img src={require(`../../assets/images/${get(currentQuestionAnswer, 'answer.img', get(currentQuestion, `answers[${currentAnswer.id}].img`, 'martialStatus'))}.png`).default} alt="cc" /> */}
-                    <img src={require(`../../assets/images/${get(currentQuestion, `answers[${get(currentAnswer, 'id', 0)}].img`, 'martialStatus')}.png`).default} alt="cc" />
-                    <img src={circle} alt="circle" className="circle-image" />
-                </SurveyMainSection>
-            </SurveyMainWrapper>
-            <Button variant="outlined" color="primary" className={classes.button} onClick={handleSaveClick}>
-                {lang === 'en' ? 'Save' : 'حفظ'}
-            </Button>
-        </SurveyWrapper>
+                                                            </RadioAnswerSection>
+                                                        </RadioAnswerTypeWrapper>
+                                                    )
+                                                })
+                                            }
+                                        </>
+                                }
+                                <ButtonControlsWrapper>
+                                    <Button variant="outlined" color="primary" className={classes.button} onClick={handlePrevClick}>
+                                        {lang === 'en' ? 'Prev' : 'الرجوع'}
+                                    </Button>
+                                    <Button variant="outlined" color="primary" className={classes.right} onClick={handleNextClick}>
+                                        {lang === 'en' ? 'Next' : 'التالى'}
+                                    </Button>
+                                </ButtonControlsWrapper>
+                            </>
+                        </SurveyMainSection>
+                        <SurveyMainSection className="images-section">
+                            {/* <img src={require(`../../assets/images/${get(currentQuestionAnswer, 'answer.img', get(currentQuestion, `answers[${currentAnswer.id}].img`, 'martialStatus'))}.png`).default} alt="cc" /> */}
+                            <img src={require(`../../assets/images/${get(currentQuestion, `answers[${get(currentAnswer, 'id', 0)}].img`, 'martialStatus')}.png`).default} alt="cc" />
+                            <img src={circle} alt="circle" className="circle-image" />
+                        </SurveyMainSection>
+                    </SurveyMainWrapper>
+                    <Button variant="outlined" color="primary" className={classes.button} onClick={handleSaveClick}>
+                        {lang === 'en' ? 'Save' : 'حفظ'}
+                    </Button>
+                </SurveyWrapper>
+            </CSSTransition>
+        </TransitionGroup>
     )
 }
 
@@ -449,7 +462,7 @@ const RadioAnswerSection = styled.div`
                         }
                     </Carousel> */}
 
-                     {/* <FormLabel component="legend"><span style={{ color: '#00AF9A', marginRight: '10px', fontSize: '32px' }}>{get(currentQuestion, 'id', '')}</span>{get(currentQuestion, 'question', '')}</FormLabel>
+{/* <FormLabel component="legend"><span style={{ color: '#00AF9A', marginRight: '10px', fontSize: '32px' }}>{get(currentQuestion, 'id', '')}</span>{get(currentQuestion, 'question', '')}</FormLabel>
                         <SelectStyled
                             native
                             value={JSON.stringify(get(currentQuestionAnswer, 'answer', currentAnswer))}

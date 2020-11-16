@@ -13,6 +13,7 @@ const initialState = {
     lang: 'ar',
     currentType: Quizs.sourceType[0],
     quizsTypes: Quizs.sourceType,
+    quizsTypesAr: QuizsAr.sourceType,
     quizQuestions: Quizs.questions,
     quizQuestionsAr: QuizsAr.questions,
     currentQuestion: Quizs.questions[0],
@@ -25,11 +26,12 @@ const QuizReducer = (state = initialState , action) => {
         case SAVE_LANG:
             return{...state, lang: action.payload.lang}
         case UPDATE_CURRENT_TYPE:
-            return {...state , currentType: state.quizsTypes[action.payload.index]  };
+            const QuizTypes = state.lang === 'en' ? get(state, 'quizsTypes', []) : get(state, 'quizsTypesAr', []);
+            return {...state , currentType: QuizTypes[action.payload.index]  };
         case UPDATE_CURRENT_Question:
             const QuizQuestions = state.lang === 'en' ? get(state, 'quizQuestions', []) : get(state, 'quizQuestionsAr', []);
             let filteredQuestions =  QuizQuestions.filter((item) => {
-                return item.typeId === state.currentType.id
+                return item.typeId === get(state, 'currentType.id', 1)
             })
             return {...state , currentQuestion: filteredQuestions[action.payload.index] };
         case UPDATE_Answered_Questions:
