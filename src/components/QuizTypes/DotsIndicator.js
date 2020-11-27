@@ -3,16 +3,18 @@ import PropTypes from 'prop-types'
 
 function Dot (props) {
   return (
+    <>
     <span style={{
       display: 'inline-block',
-      height: '8px',
-      width: '8px',
-      borderRadius: '4px',
+      height: '6px',
+      width: '6px',
+      borderRadius: '3px',
       backgroundColor: '#00AF9A',
       margin: '7px 5px',
       opacity: props.selected ? '1' : '0.3',
       transitionDuration: '300ms'
     }} />
+    </>
   )
 }
 
@@ -22,6 +24,7 @@ export default function IndicatorDots (props) {
     width: '100%',
     zIndex: '100',
     bottom: '0px',
+    top:'132px',
     textAlign: 'center'
   }
 
@@ -34,7 +37,10 @@ export default function IndicatorDots (props) {
         Array.apply(null, Array(props.total)).map((x, i) => {
           return <Dot key={i} selected={props.index === i} />
         })
-      }</div>
+       
+      }
+      <p style={{color: '#00AF9A'}}>{`${props.index+1}/${props.total}`}</p>
+      </div>
     )
   }
 }

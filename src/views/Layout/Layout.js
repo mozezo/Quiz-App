@@ -23,7 +23,7 @@ function DefaultLayout({ history }) {
             ''
             ) : (
             <>
-                <Navbar />
+                {/* <Navbar /> */}
             </>
             )
         }

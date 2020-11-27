@@ -17,6 +17,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { get, isEmpty } from 'lodash';
 import Buttons from './QuestionCustomButtons';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import ByteCode from '../../assets/images/byteCode.png';
 
 import { updateCurrentQuestion, updateAnsweredQuestions, updateAnsweredAgeQuestions } from '../../redux/actions';
 
@@ -25,31 +26,41 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(3),
     },
     button: {
-        margin: theme.spacing(1, 1, 0, 0),
+        borderRadius: 0,
+        padding: '0px 25px',
         color: '#00AF9A',
-        border: ' 1px solid #00AF9A',
+        border: ' 2px solid #00AF9A',
         alignSelf: 'flex-start',
-        padding: '8px 36px',
-        marginTop: '75px',
+        marginTop: '30px',
         transition: 'all 1s ease',
     },
     right: {
-        margin: theme.spacing(1, 1, 0, 0),
-        border: ' 1px solid #00AF9A',
+        borderRadius: 0,
+        padding: '0px 25px',
+        border: ' 2px solid #00AF9A',
         alignSelf: 'flex-start',
-        padding: '8px 36px',
         background: '#00AF9A !important',
         color: '#FFF',
-        marginTop: '75px',
+        marginTop: '30px',
         transition: 'all 1s ease'
     },
     add: {
         border: ' 1px solid #00AF9A',
         background: '#00AF9A !important',
+        borderRadius: 0,
+        padding: '0px 2px',
         color: '#FFF',
         marginTop: '60px',
         marginLeft: '20px'
-    }
+    },
+    save: {
+        borderRadius: 0,
+        padding: '0px 25px',
+        color: '#00AF9A',
+        border: ' 2px solid #00AF9A',
+        // alignSelf: 'flex-start',
+        transition: 'all 1s ease',
+    },
 }));
 
 const GreenRadio = withStyles({
@@ -186,135 +197,179 @@ const Questions = ({ history }) => {
     }
 
     return (
-        <TransitionGroup>
-            <CSSTransition
+        <Container>
+            {/* <CSSTransition
                 key={get(currentQuestion, 'id', '')}
                 timeout={1000}
                 classNames="slide"
-            >
-                <SurveyWrapper lang={lang}>
-                    <SurveyMainWrapper>
-                        <SurveyMainSection >
-                            <h1>{get(currentType, 'name', '')}</h1>
-                            <>
-                                <FormLabel component="legend"><span style={{ color: '#00AF9A', marginRight: '10px', marginLeft: '10px', fontSize: '32px' }}>{get(currentQuestion, 'id', '')}</span>{get(currentQuestion, 'question', '')}</FormLabel>
+            > */}
+            <Navbar>
+                <div><img src={ByteCode} alt="ByteCode" /></div>
+                <div> <h5>Hello, Username!</h5></div>
+            </Navbar>
+            <SurveyWrapper lang={lang}>
 
-                                {
-                                    get(currentQuestion, `answerType`, '') === 'select' ? (
+                <SurveyMainWrapper>
+                    <SurveyMainSection >
+                        <h1>{get(currentType, 'name', '')}</h1>
+                        <>
+                            <FormLabel component="legend"><span style={{ color: '#00AF9A', marginRight: '10px', marginLeft: '10px', fontSize: '32px' }}>{get(currentQuestion, 'id', '')}</span>{get(currentQuestion, 'question', '')}</FormLabel>
 
-                                        <>
-                                            <SelectStyled
-                                                native
-                                                value={JSON.stringify(currentAnswer)}
-                                                //value={JSON.stringify(get(currentQuestionAnswer, 'answer', currentAnswer))}
-                                                defaultValue={get(currentQuestion, `answers[${0}].answer`)}
-                                                onChange={handleAnswerChange}
-                                            >
-                                                {
-                                                    get(currentQuestion, 'answers', []).map((answerItem) => {
-                                                        return (
-                                                            <option value={JSON.stringify(answerItem)} style={{ color: '#00AF9A', fontSize: '18px', fontWeight: '700', marginTop: '10px' }}>{answerItem.answer}</option>
-                                                        )
-                                                    })
-                                                }
-                                            </SelectStyled>
-                                            <ErrorMessage>{errorMessage ? errorMessage : ''}</ErrorMessage>
-                                        </>
+                            {
+                                get(currentQuestion, `answerType`, '') === 'select' ? (
 
-                                    )
-                                        :
-                                        <>
+                                    <>
+                                        <SelectStyled
+                                            native
+                                            value={JSON.stringify(currentAnswer)}
+                                            //value={JSON.stringify(get(currentQuestionAnswer, 'answer', currentAnswer))}
+                                            defaultValue={get(currentQuestion, `answers[${0}].answer`)}
+                                            onChange={handleAnswerChange}
+                                        >
                                             {
-                                                currentAgeAnswer.map((ageAnswer, index) => {
+                                                get(currentQuestion, 'answers', []).map((answerItem) => {
                                                     return (
-                                                        <RadioAnswerTypeWrapper key={index}>
-                                                            <RadioAnswerSection style={{ width: '55%' }}>
-                                                                <h3>Age</h3>
-                                                                <Slider
-                                                                    ValueLabelComponent={ValueLabelComponent}
-                                                                    aria-label="custom thumb label"
-                                                                    defaultValue={7}
-                                                                    max={26}
-                                                                    style={{ color: 'rgb(0, 175, 154)' }}
-                                                                    onChange={(event, newValue) => handleAgeChange(event, newValue, ageAnswer)}
-                                                                />
-                                                            </RadioAnswerSection>
-                                                            <RadioAnswerSection>
-                                                                <img src={Male} alt="male" />
-                                                                <GreenRadio
-                                                                    checked={ageAnswer.type === 'male'}
-                                                                    onChange={(event) => handleGenderChange(event, ageAnswer)}
-                                                                    value="male"
-                                                                    name="radio-button-demo"
-                                                                    inputProps={{ 'aria-label': 'male' }}
-                                                                />
-                                                            </RadioAnswerSection>
-                                                            <RadioAnswerSection>
-                                                                <img src={Female} alt="female" />
-                                                                <GreenRadio
-                                                                    checked={ageAnswer.type === 'female'}
-                                                                    onChange={(event) => handleGenderChange(event, ageAnswer)}
-                                                                    value="female"
-                                                                    name="radio-button-demo"
-                                                                    inputProps={{ 'aria-label': 'female' }}
-                                                                />
-                                                            </RadioAnswerSection>
-                                                            <RadioAnswerSection>
-                                                                <div></div>
-                                                                <Button variant="outlined" color="primary" className={classes.add} onClick={handleAddNewChild}>
-                                                                    add
-                                                   </Button>
-                                                            </RadioAnswerSection>
-                                                        </RadioAnswerTypeWrapper>
+                                                        <option value={JSON.stringify(answerItem)} style={{ color: '#00AF9A', fontSize: '18px', fontWeight: '700', marginTop: '10px' }}>{answerItem.answer}</option>
                                                     )
                                                 })
                                             }
-                                        </>
-                                }
-                                <ButtonControlsWrapper>
-                                    <Button variant="outlined" color="primary" className={classes.button} onClick={handlePrevClick}>
-                                        {lang === 'en' ? 'Prev' : 'الرجوع'}
-                                    </Button>
-                                    <Button variant="outlined" color="primary" className={classes.right} onClick={handleNextClick}>
-                                        {lang === 'en' ? 'Next' : 'التالى'}
-                                    </Button>
-                                </ButtonControlsWrapper>
-                            </>
-                        </SurveyMainSection>
-                        <SurveyMainSection className="images-section">
-                            {/* <img src={require(`../../assets/images/${get(currentQuestionAnswer, 'answer.img', get(currentQuestion, `answers[${currentAnswer.id}].img`, 'martialStatus'))}.png`).default} alt="cc" /> */}
-                            <img src={require(`../../assets/images/${get(currentQuestion, `answers[${get(currentAnswer, 'id', 0)}].img`, 'martialStatus')}.png`).default} alt="cc" />
-                            <img src={circle} alt="circle" className="circle-image" />
-                        </SurveyMainSection>
-                    </SurveyMainWrapper>
-                    <Button variant="outlined" color="primary" className={classes.button} onClick={handleSaveClick}>
+                                        </SelectStyled>
+                                        <ErrorMessage>{errorMessage ? errorMessage : ''}</ErrorMessage>
+                                    </>
+
+                                )
+                                    :
+                                    <>
+                                        {
+                                            currentAgeAnswer.map((ageAnswer, index) => {
+                                                return (
+                                                    <RadioAnswerTypeWrapper key={index}>
+                                                        <RadioAnswerSection style={{ width: '55%' }}>
+                                                            <h3>Age</h3>
+                                                            <Slider
+                                                                ValueLabelComponent={ValueLabelComponent}
+                                                                aria-label="custom thumb label"
+                                                                defaultValue={7}
+                                                                max={26}
+                                                                style={{ color: 'rgb(0, 175, 154)' }}
+                                                                onChange={(event, newValue) => handleAgeChange(event, newValue, ageAnswer)}
+                                                            />
+                                                        </RadioAnswerSection>
+                                                        <RadioAnswerSection>
+                                                            <img src={Male} alt="male" />
+                                                            <GreenRadio
+                                                                checked={ageAnswer.type === 'male'}
+                                                                onChange={(event) => handleGenderChange(event, ageAnswer)}
+                                                                value="male"
+                                                                name="radio-button-demo"
+                                                                inputProps={{ 'aria-label': 'male' }}
+                                                            />
+                                                        </RadioAnswerSection>
+                                                        <RadioAnswerSection>
+                                                            <img src={Female} alt="female" />
+                                                            <GreenRadio
+                                                                checked={ageAnswer.type === 'female'}
+                                                                onChange={(event) => handleGenderChange(event, ageAnswer)}
+                                                                value="female"
+                                                                name="radio-button-demo"
+                                                                inputProps={{ 'aria-label': 'female' }}
+                                                            />
+                                                        </RadioAnswerSection>
+                                                        <RadioAnswerSection>
+                                                            <div></div>
+                                                            <Button variant="outlined" color="primary" className={classes.add} onClick={handleAddNewChild}>
+                                                                add
+                                                   </Button>
+                                                        </RadioAnswerSection>
+                                                    </RadioAnswerTypeWrapper>
+                                                )
+                                            })
+                                        }
+                                    </>
+                            }
+                            <ButtonControlsWrapper>
+                                <Button variant="outlined" color="primary" className={classes.button} onClick={handlePrevClick}>
+                                    {lang === 'en' ? 'Prev' : 'الرجوع'}
+                                </Button>
+                                <Button variant="outlined" color="primary" className={classes.right} onClick={handleNextClick}>
+                                    {lang === 'en' ? 'Next' : 'التالى'}
+                                </Button>
+                            </ButtonControlsWrapper>
+                        </>
+                    </SurveyMainSection>
+                    <SurveyMainSection className="images-section">
+                        {/* <img src={require(`../../assets/images/${get(currentQuestionAnswer, 'answer.img', get(currentQuestion, `answers[${currentAnswer.id}].img`, 'martialStatus'))}.png`).default} alt="cc" /> */}
+                        <img src={require(`../../assets/images/${get(currentQuestion, `answers[${get(currentAnswer, 'id', 0)}].img`, 'martialStatus')}.png`).default} alt="cc" />
+                        <img src={circle} alt="circle" className="circle-image" />
+                    </SurveyMainSection>
+                </SurveyMainWrapper>
+                {/* <Button variant="outlined" color="primary" className={classes.button} onClick={handleSaveClick}>
                         {lang === 'en' ? 'Save' : 'حفظ'}
-                    </Button>
-                </SurveyWrapper>
-            </CSSTransition>
-        </TransitionGroup>
+                    </Button> */}
+            </SurveyWrapper>
+            <Footer>
+                <Button variant="outlined" color="primary" className={classes.save} onClick={handleSaveClick}>
+                    {lang === 'en' ? 'Save' : 'حفظ'}
+                </Button>
+            </Footer>
+            {/* </CSSTransition> */}
+        </Container>
     )
 }
 
 
 export default Questions;
 
+
+const Container = styled.div`
+    width: 98vw;
+    max-width: 98vw;
+    height: 100vh; 
+    /* max-height: 100vh; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    @media only screen and (max-width: 768px) {
+        height: 100%; 
+        max-height: 100%;
+  }
+`;
+
+
 const SurveyWrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 80%;
-    margin: 30px auto 0px;
+    /* width: 100vw;
+    height: 90vh; 
+    max-height: 90vh; */
+    /* width: 80%;
+    margin: 30px auto 0px; */
     direction: ${props => props.lang === 'en' ? 'ltr' : 'rtl'};
 `;
 
 
+
+const Navbar = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px 65px 0px;
+    color: #19d4d4;
+
+    @media only screen and (max-width: 490px) {
+        padding: 50px 45px;
+    }
+`;
+
 const SurveyMainWrapper = styled.div`
     display: flex;
     justify-content: space-between;
-
+    width: 80%;
+    margin: 30px auto 0px;
     @media only screen and (max-width: 825px) {
-        flex-direction: column;
+        flex-direction: column-reverse;
     }
 
     .images-section{
@@ -323,7 +378,7 @@ const SurveyMainWrapper = styled.div`
 `;
 
 const SurveyMainSection = styled.div`
-  width: 45%;
+  width: 35%;
   min-height: 295px;
   display: flex;
   flex-direction: column;
@@ -339,6 +394,7 @@ const SurveyMainSection = styled.div`
   {
     color: #00AF9A;
     font-size: 36px;
+    align-self: flex-start;
   }
 
   .quiz-types-carousel{
@@ -362,8 +418,8 @@ const SurveyMainSection = styled.div`
   {
     position: absolute;
     width: 26%;
-    animation: spin 5s ease-in-out infinite;
-    -webkit-animation: spin 5s ease-in-out infinite;
+    animation: spin 16s ease-in-out infinite;
+    -webkit-animation: spin 16s ease-in-out infinite;
 
     @media only screen and (max-width: 825px) {
         width: 46%;
@@ -436,45 +492,9 @@ const RadioAnswerSection = styled.div`
     }
 `;
 
-
-{/* <Carousel className="quiz-types-carousel" auto widgets={[ Buttons]}>
-                        {
-                            questions.map((question) => {
-                                return (
-                                    <div>
-                                        <FormLabel component="legend"><span style={{color: '#00AF9A', marginRight: '10px', fontSize: '32px'}}>{question.id}</span>{question.question}</FormLabel>
-                                        <SelectStyled
-                                            native
-                                            //value={state.age}
-                                            onChange={handleAnswerChange}
-                                        >
-                                            {
-                                                get(question, 'answers', []).map((answerItem) => {
-                                                    return (
-                                                        <option value={JSON.stringify(answerItem)} style={{color: '#00AF9A', fontSize: '18px', fontWeight: '700', marginTop: '10px'}}>{answerItem.answer}</option>
-                                                    )
-                                                })
-                                            }
-                                        </SelectStyled>
-                                    </div>
-                                )
-                            })
-                        }
-                    </Carousel> */}
-
-{/* <FormLabel component="legend"><span style={{ color: '#00AF9A', marginRight: '10px', fontSize: '32px' }}>{get(currentQuestion, 'id', '')}</span>{get(currentQuestion, 'question', '')}</FormLabel>
-                        <SelectStyled
-                            native
-                            value={JSON.stringify(get(currentQuestionAnswer, 'answer', currentAnswer))}
-                            defaultValue={get(currentQuestion, `answers[${0}].answer`)}
-                            onChange={handleAnswerChange}
-                        >
-                            {
-                                get(currentQuestion, 'answers', []).map((answerItem) => {
-                                    return (
-                                        <option value={JSON.stringify(answerItem)} style={{ color: '#00AF9A', fontSize: '18px', fontWeight: '700', marginTop: '10px' }}>{answerItem.answer}</option>
-                                    )
-                                })
-                            }
-                        </SelectStyled>
-                        <ErrorMessage>{errorMessage ? errorMessage : ''}</ErrorMessage> */}
+const Footer = styled.div`
+    display: flex;
+    width: 80%;
+    margin: 30px auto;
+    padding-bottom: 30px;
+`;

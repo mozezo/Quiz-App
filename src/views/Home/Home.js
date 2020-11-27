@@ -12,21 +12,20 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(3),
     },
     button: {
-        margin: theme.spacing(1, 1, 0, 0),
         color: '#19d4d4',
         border:' 1px solid #19d4d4',
+        borderRadius: 0,
+        padding: '0px 25px',
         alignSelf: 'flex-start',
         opacity: 0.8,
     },
     langButton: {
-        margin: theme.spacing(1, 1, 0, 0),
         color: '#FFF',
         border: 'none',
         alignSelf: 'flex-start',
         opacity: 0.8,
     },
     langButtonActive: {
-        margin: theme.spacing(1, 1, 0, 0),
         color: '#19d4d4',
         border: 'none',
         alignSelf: 'flex-start',
@@ -61,7 +60,7 @@ const Home = ({className, history}) => {
             <HomeMainWrapper lang={lang}>
                 <HomeMainSection lang={lang}>
                     <img src={circle} alt="circle" className="circle-image" /> 
-                    <img src={ByteCodeHome} alt="ByteCode" style={{marginTop: '0px'}}/>
+                    <img src={ByteCodeHome} alt="ByteCode" className="logo-image"/>
                     <h2>{lang === 'en' ? 'Welcome' : 'اهلا بك' } </h2>
                 </HomeMainSection>
                 <HomeMainSection lang={lang}>
@@ -84,12 +83,18 @@ const Home = ({className, history}) => {
 }
 
 const HomeWrapper = styled(Home)`
-  width: 100%;
-  min-height: 100vh;
+  width: 100vw;
+  max-width: 100vw;
+  height: 100vh; 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   background-color: #230871;
+  overflow-y: hidden;
+
+  @media only screen and (max-width: 768px) {
+    height: 100%; 
+  }
 `;
 
 export default HomeWrapper;
@@ -97,16 +102,16 @@ export default HomeWrapper;
 const HomeNavbar = styled.div`
     display: flex;
     justify-content: space-between;
-    padding: 50px 65px;
+    padding: 50px 65px 0px;
     color: #19d4d4;
 `;
 
 const HomeMainWrapper = styled.div`
     display: flex;
     justify-content: space-between;
-    width: 80%;
+    width: 70%;
     margin: 0 auto;
-    /* direction: ${props => props.lang === 'ar' ? 'rtl' : 'ltr'}; */
+    direction: ${props => props.lang === 'ar' ? 'rtl' : 'ltr'};
 
     @media only screen and (max-width: 768px) {
         flex-direction: column;
@@ -115,34 +120,35 @@ const HomeMainWrapper = styled.div`
 `;
 
 const HomeMainSection = styled.div`
-  width: 29%;
+  width: 36%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   @media only screen and (max-width: 768px) {
-    width: 90%;
-    margin: 0 auto;
+    width: 100%;
+    margin: 10px auto;
   }
 
   p
   {
     color: #FFF;
     text-align: ${props => props.lang === 'ar' ? 'right' : 'left'};
-    font-size: 19px;
-    line-height: 37px;
-    margin-top: 175px;
+    font-size: 26px;
     margin-bottom: 70px;
     opacity: 0.8;
-
+    margin-top: 45%;
   }
 
   h2
     {
-      color: #FFF;
       margin-top: 50px;
-      opacity: 0.8;
+      opacity:0.8;
+      color:#FFFFFF;
+      font-size:45px;
+      @media only screen and (max-width: 768px) {
+        font-size:29px;
+      }
     }
 
   img
@@ -152,19 +158,27 @@ const HomeMainSection = styled.div`
         }
     }
 
+  .logo-image
+  {
+    width: 80%;
+    margin-top: 15%;
+    @media only screen and (max-width: 768px) {
+        width: 50%;
+    }
+  }
   .circle-image
   {
     position: absolute;
-    width: 26%;
-    animation: spin 9s ease-in-out infinite;
-    -webkit-animation: spin 9s ease-in-out infinite;
+    width: 32%;
+    animation: spin 16s ease-in-out infinite;
+    -webkit-animation: spin 16s ease-in-out infinite;
 
     @media only screen and (max-width: 950px) {
         width: 48%;
     }
 
     @media only screen and (max-width: 490px) {
-        width: 94%;
+        width: 85%;
     }
 
     @keyframes spin {
@@ -182,7 +196,7 @@ const HomeMainSection = styled.div`
 
 const Footer = styled.div`
     display: flex;
-    padding: 50px 65px;
+    padding: 30px 65px 20px;
     .ar
     {
         color: #19d4d4;

@@ -20,14 +20,14 @@ function App() {
           <Router>
             <Switch>
               <Suspense fallback={<Loading />}>
-                <CSSTransition
+                {/* <CSSTransition
                   in={true}
                   appear={true}
                   timeout={1000}
                   classNames="fade"
-                >
+                > */}
                   <Route path="/" name="Home" component={DefaultLayout} />
-                </CSSTransition>
+                {/* </CSSTransition> */}
               </Suspense>
             </Switch>
           </Router>
