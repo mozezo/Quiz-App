@@ -4,6 +4,7 @@ import Carousel from 're-carousel';
 import Button from '@material-ui/core/Button';
 import FormLabel from '@material-ui/core/FormLabel';
 import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 import Slider from '@material-ui/core/Slider';
 import Tooltip from '@material-ui/core/Tooltip';
 import Radio from '@material-ui/core/Radio';
@@ -18,7 +19,7 @@ import { get, isEmpty } from 'lodash';
 import Buttons from './QuestionCustomButtons';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import ByteCode from '../../assets/images/byteCode.png';
-
+import CrossfadeImage from 'react-crossfade-image';
 import { updateCurrentQuestion, updateAnsweredQuestions, updateAnsweredAgeQuestions } from '../../redux/actions';
 
 const useStyles = makeStyles((theme) => ({
@@ -29,20 +30,18 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: 0,
         padding: '0px 25px',
         color: '#00AF9A',
-        border: ' 2px solid #00AF9A',
+        border: ' 1px solid #00AF9A',
         alignSelf: 'flex-start',
         marginTop: '30px',
-        transition: 'all 1s ease',
     },
     right: {
         borderRadius: 0,
         padding: '0px 25px',
-        border: ' 2px solid #00AF9A',
+        border: ' 1px solid #00AF9A',
         alignSelf: 'flex-start',
         background: '#00AF9A !important',
         color: '#FFF',
         marginTop: '30px',
-        transition: 'all 1s ease'
     },
     add: {
         border: ' 1px solid #00AF9A',
@@ -57,9 +56,8 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: 0,
         padding: '0px 25px',
         color: '#00AF9A',
-        border: ' 2px solid #00AF9A',
+        border: ' 1px solid #00AF9A',
         // alignSelf: 'flex-start',
-        transition: 'all 1s ease',
     },
 }));
 
@@ -99,7 +97,7 @@ const Questions = ({ history }) => {
     // const [currentAnswer, setCurrentAnswer] = useState(get(currentQuestion, `answers[${0}]`, []));
     const [currentAnswer, setCurrentAnswer] = useState(get(currentQuestionAnswer, `answer`, get(currentQuestion, `answers[${0}]`, [])));
 
-    const [currentAgeAnswer, setCurrentAgeAnswer] = useState(get(currentQuestion, `answers`, []));
+    const [currentAgeAnswer, setCurrentAgeAnswer] = useState([]);
     const [errorMessage, setErrorMessage] = useState('');
 
     const [genderType, setGenderType] = useState('male');
@@ -119,15 +117,24 @@ const Questions = ({ history }) => {
         setCurrentAgeAnswer(newAgeAnswers);
     };
 
-    const handleAddNewChild = () => {
-        let newAgeAnswer = [...currentAgeAnswer, { id: currentAgeAnswer.length, type: '', age: '', img: `${currentAgeAnswer.length}children` }];
-        setCurrentAgeAnswer(newAgeAnswer);
+    const handleAddNewChild = (index) => {
+        if(index < currentAgeAnswer.length-1 ){
+            let newAgeAnswer = [...currentAgeAnswer];
+            newAgeAnswer.splice(index, 1);
+            setCurrentAgeAnswer(newAgeAnswer);
+        }else{
+            let newAgeAnswer = [...currentAgeAnswer, { id: currentAgeAnswer.length, type: '', age: '', img: `${currentAgeAnswer.length}children` }];
+            setCurrentAgeAnswer(newAgeAnswer);
+        }
     }
 
     const handleAnswerChange = (event) => {
         setCurrentAnswer(JSON.parse(event.target.value));
         setErrorMessage('');
-        //dispatch(updateAnsweredQuestions(currentQuestion, JSON.parse(event.target.value)))
+        var qustionImage = document.getElementById("questionImage");
+        qustionImage.classList.remove("question-image");
+        void qustionImage.offsetWidth;
+        qustionImage.classList.add("question-image");
     }
 
     useEffect(() => {
@@ -142,13 +149,13 @@ const Questions = ({ history }) => {
         } else {
             dispatch(updateCurrentQuestion(currentquestionIndex));
         }
+
+        setCurrentAgeAnswer(get(currentQuestion, `answers`, []))
     }, []);
 
 
     useEffect(() => {
         const currentQuestionAnswerValue = currentAnsweredQuestions.find((item) => item.typeId === get(currentQuestion, 'typeId') && item.id === get(currentQuestion, 'id'));
-        // console.log('currentQuestionAnswer', currentQuestionAnswerValue);
-        // console.log('currentAnswer', currentAnswer);
         setCurrentQuestionAnswer(currentQuestionAnswerValue);
         setCurrentAnswer(get(currentQuestionAnswerValue, 'answer', get(currentQuestion, `answers[${0}]`, [])))
     }, [currentQuestion]);
@@ -166,6 +173,8 @@ const Questions = ({ history }) => {
                 setCurrentAnswer(get(currentQuestion, `answers[${0}]`, []));
             } else {
                 setErrorMessage('Please Save Your Answers!');
+                dispatch(updateAnsweredQuestions(currentQuestion, currentAnswer))
+                history.push('/quizs')
             }
         } else {
             if (currentquestionIndex + 1 < questions.length) {
@@ -190,19 +199,12 @@ const Questions = ({ history }) => {
             setErrorMessage('Please answer this question!');
             return;
         }
-
-        //dispatch(updateCurrentQuestion(currentquestionIndex + 1));
         dispatch(updateAnsweredQuestions(currentQuestion, currentAnswer))
-        history.push('/quizCompleted')
+        history.push('/quizs')
     }
 
     return (
         <Container>
-            {/* <CSSTransition
-                key={get(currentQuestion, 'id', '')}
-                timeout={1000}
-                classNames="slide"
-            > */}
             <Navbar>
                 <div><img src={ByteCode} alt="ByteCode" /></div>
                 <div> <h5>Hello, Username!</h5></div>
@@ -222,13 +224,13 @@ const Questions = ({ history }) => {
                                         <SelectStyled
                                             native
                                             value={JSON.stringify(currentAnswer)}
-                                            //value={JSON.stringify(get(currentQuestionAnswer, 'answer', currentAnswer))}
                                             defaultValue={get(currentQuestion, `answers[${0}].answer`)}
                                             onChange={handleAnswerChange}
                                         >
                                             {
                                                 get(currentQuestion, 'answers', []).map((answerItem) => {
                                                     return (
+                                                        // <MenuItem value={JSON.stringify(answerItem)}>{answerItem.answer}</MenuItem>
                                                         <option value={JSON.stringify(answerItem)} style={{ color: '#00AF9A', fontSize: '18px', fontWeight: '700', marginTop: '10px' }}>{answerItem.answer}</option>
                                                     )
                                                 })
@@ -277,9 +279,9 @@ const Questions = ({ history }) => {
                                                         </RadioAnswerSection>
                                                         <RadioAnswerSection>
                                                             <div></div>
-                                                            <Button variant="outlined" color="primary" className={classes.add} onClick={handleAddNewChild}>
-                                                                add
-                                                   </Button>
+                                                            <Button variant="outlined" color="primary" className={classes.add} onClick={() => handleAddNewChild(index)}>
+                                                                {index < currentAgeAnswer.length-1 ? 'remove' : 'add'}
+                                                            </Button>
                                                         </RadioAnswerSection>
                                                     </RadioAnswerTypeWrapper>
                                                 )
@@ -298,21 +300,16 @@ const Questions = ({ history }) => {
                         </>
                     </SurveyMainSection>
                     <SurveyMainSection className="images-section">
-                        {/* <img src={require(`../../assets/images/${get(currentQuestionAnswer, 'answer.img', get(currentQuestion, `answers[${currentAnswer.id}].img`, 'martialStatus'))}.png`).default} alt="cc" /> */}
-                        <img src={require(`../../assets/images/${get(currentQuestion, `answers[${get(currentAnswer, 'id', 0)}].img`, 'martialStatus')}.png`).default} alt="cc" />
-                        <img src={circle} alt="circle" className="circle-image" />
+                        <img id="questionImage" src={require(`../../assets/images/${get(currentQuestion, `answers[${get(currentAnswer, 'id', 0)}].img`, 'martialStatus')}.png`).default} className="question-image" alt="cc" />
+                        <img src={circle} alt="circle"  className="circle-image" />
                     </SurveyMainSection>
                 </SurveyMainWrapper>
-                {/* <Button variant="outlined" color="primary" className={classes.button} onClick={handleSaveClick}>
-                        {lang === 'en' ? 'Save' : 'حفظ'}
-                    </Button> */}
             </SurveyWrapper>
             <Footer>
                 <Button variant="outlined" color="primary" className={classes.save} onClick={handleSaveClick}>
                     {lang === 'en' ? 'Save' : 'حفظ'}
                 </Button>
             </Footer>
-            {/* </CSSTransition> */}
         </Container>
     )
 }
@@ -322,8 +319,8 @@ export default Questions;
 
 
 const Container = styled.div`
-    width: 98vw;
-    max-width: 98vw;
+    /* width: 98vw; */
+    max-width: 94vw;
     height: 100vh; 
     /* max-height: 100vh; */
     display: flex;
@@ -341,12 +338,11 @@ const SurveyWrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    /* width: 100vw;
-    height: 90vh; 
-    max-height: 90vh; */
-    /* width: 80%;
-    margin: 30px auto 0px; */
     direction: ${props => props.lang === 'en' ? 'ltr' : 'rtl'};
+
+    @media only screen and (min-width: 1440px){
+        max-height: 90vh;
+    }
 `;
 
 
@@ -414,12 +410,38 @@ const SurveyMainSection = styled.div`
     align-self: flex-start;
   }
 
+  @keyframes fadeInDown {
+  0% {
+    opacity: 0.5;
+	-webkit-transform: translateX(-1rem);
+    }
+  100% {
+    -webkit-transform: translateZ(0);
+    opacity: 1;
+  }
+}
+  .question-image{
+    /* width: 60%; */
+    animation: fadeInDown 1s ease-in-out;
+    -webkit-animation: fadeInDown 1s ease-in-out;
+    @media only screen and (min-width: 1440px) {
+        /* width: 65%; */
+        width: 540px;
+        height: 460px;
+        object-fit: contain;
+        }
+   }
+
   .circle-image
   {
     position: absolute;
     width: 26%;
     animation: spin 16s ease-in-out infinite;
     -webkit-animation: spin 16s ease-in-out infinite;
+
+    @media only screen and (min-width: 1440px) {
+        width: 42%;
+    }
 
     @media only screen and (max-width: 825px) {
         width: 46%;

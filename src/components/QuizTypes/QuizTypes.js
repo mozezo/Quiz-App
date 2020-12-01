@@ -25,6 +25,14 @@ const useStyles = makeStyles((theme) => ({
         border: ' 1px solid #19d4d4',
         alignSelf: 'flex-start',
         marginTop: '120px',
+        ['@media (min-width:1440px)']: { 
+           fontSize: '24px',
+           padding: '0px 35px',
+        },
+        ['@media (max-width:768px)']: { 
+            marginTop: '30px',
+            marginBottom: '30px'
+         }
     },
 }));
 
@@ -68,7 +76,7 @@ const SurveyCarousel = ({ className, history }) => {
                         </Carousel>
                     </SurveyMainSection>
                     <SurveyMainSection type='image'>
-                        <img src={require(`../../assets/images/${get(currentType, 'img', 'lifeStyle')}.png`).default} alt="" />
+                        <img src={require(`../../assets/images/${get(currentType, 'img', 'lifeStyle')}.png`).default} className="logo-image" alt="" />
                         <img src={circle} alt="circle" className="circle-image" />
                     </SurveyMainSection>
                 </SurveyMainWrapper>
@@ -76,11 +84,6 @@ const SurveyCarousel = ({ className, history }) => {
                     {isAr ? 'ابدء' : 'Start'}
                 </Button>
             </SurveyWrapper>
-            {/* <Footer>
-                <Button variant="outlined" color="primary" className={classes.button} onClick={handleStartQuizQuestions}>
-                    {isAr ? 'ابدء' : 'Start'}
-                </Button>
-            </Footer> */}
         </div>
     )
 }
@@ -88,12 +91,17 @@ const SurveyCarousel = ({ className, history }) => {
 const SurveyCarouselWrapper = styled(SurveyCarousel)`
   width: 98vw;
   max-width: 98vw;
-  height: 90vh; 
-  max-height: 90vh;
+  height: 96vh; 
+  /* max-height: 90vh; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   overflow-y: hidden;
+
+  @media only screen and (min-width: 1640px) {
+    height: 82vh; 
+    max-height: 82vh;
+  }
 
   @media only screen and (max-width: 768px) {
     height: 100%; 
@@ -133,6 +141,7 @@ const Navbar = styled.div`
 const SurveyMainWrapper = styled.div`
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-bottom: 30px;
     @media only screen and (max-width: 768px) {
         flex-direction: column-reverse;
@@ -140,7 +149,8 @@ const SurveyMainWrapper = styled.div`
 `;
 
 const SurveyMainSection = styled.div`
-  width: ${props => props.type === 'carousel' ? '20%' : '45%'};
+  width: ${props => props.type === 'carousel' ? '22%' : '45%'};
+  height: ${props => props.type === 'carousel' ? '150px' : '100%'};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -148,25 +158,42 @@ const SurveyMainSection = styled.div`
 
   @media only screen and (max-width: 768px) {
     width: 90%;
-    margin: 95px auto;
+    margin: 65px auto;
   }
 
   h1
   {
     color: #00AF9A;
     font-size: 45px;
-    /* text-align: center; */
-    /* text-align: left; */
+    @media only screen and (min-width: 1440px) {
+        font-size: 56px;
+    }
+    
   }
 
   .quiz-types-carousel{
       margin-bottom: 150px;
   }
 
+  @keyframes fadeInDown {
+  0% {
+    opacity: 0.5;
+	-webkit-transform: translateX(-1rem);
+    }
+  100% {
+    -webkit-transform: translateZ(0);
+    opacity: 1;
+  }
+}
+
   .logo-image
   {
-    width: 80%;
-    margin-top: 15%;
+    animation: fadeInDown 1s ease-in-out;
+    -webkit-animation: fadeInDown 1s ease-in-out;
+    @media only screen and (min-width: 1440px) {
+        width: 90%;
+        height: 350px;
+    }
   }
   .circle-image
   {
@@ -174,6 +201,10 @@ const SurveyMainSection = styled.div`
     width: 29%;
     animation: spin 16s ease-in-out infinite;
     -webkit-animation: spin 16s ease-in-out infinite;
+
+    @media only screen and (min-width: 1440px) {
+        width: 38%
+    }
 
     @media only screen and (max-width: 950px) {
         width: 48%;
